@@ -246,7 +246,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1200280074
 MonoBehaviour:
@@ -260,9 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09608c4dbc3f8f94d8c14d9f300b997d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kinectControllerPrefab: {fileID: 8411945721137953134, guid: d6a2c7c7cb74cee4bbf4ddb1342032c3, type: 3}
   kinectCanvasPrefab: {fileID: 687128875536988938, guid: 867865c3c81d9644483f41d0935b9667, type: 3}
-  GuidVideoPrefab: {fileID: 7827671671070375162, guid: cb51d09a028f40247bb181b39fafc0e8, type: 3}
+  isStart: 0
 --- !u!1 &2022196817
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +328,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2022196821
 MonoBehaviour:
@@ -442,96 +441,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7187345371665109973
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7187345371665109975}
-  - component: {fileID: 7187345371665109974}
-  - component: {fileID: 7187345371665109977}
-  m_Layer: 0
-  m_Name: KinectControllerSetup
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &7187345371665109974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7187345371665109973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b531f336dfee5f438f94ed501caefc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensorHeight: 1
-  sensorAngle: 0
-  autoHeightAngle: 0
-  computeUserMap: 3
-  computeColorMap: 1
-  computeInfraredMap: 0
-  displayUserMap: 0
-  displayColorMap: 1
-  displaySkeletonLines: 0
-  DisplayMapsWidthPercent: 20
-  useMultiSourceReader: 0
-  minUserDistance: 0.5
-  maxUserDistance: 0
-  maxLeftRightDistance: 0
-  maxTrackedUsers: 6
-  showTrackedUsersOnly: 1
-  userDetectionOrder: 0
-  ignoreInferredJoints: 0
-  ignoreZCoordinates: 0
-  lateUpdateAvatars: 0
-  skipRemoteAvatars: 0
-  smoothing: 1
-  useBoneOrientationConstraints: 1
-  estimateJointVelocities: 0
-  velocitySmoothing: 2
-  allowTurnArounds: 0
-  allowedHandRotations: 1
-  waitTimeBeforeRemove: 1
-  avatarControllers: []
-  playerCalibrationPose: 0
-  playerCommonGestures: 
-  minTimeBetweenGestures: 0.7
-  gestureManager: {fileID: 0}
-  gestureListeners: []
-  calibrationText: {fileID: 0}
-  gesturesDebugText: {fileID: 0}
---- !u!4 &7187345371665109975
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7187345371665109973}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7187345371665109977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7187345371665109973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60b976a1901bb5d478901026c07729cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

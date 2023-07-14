@@ -18,7 +18,7 @@ using UnityEngine;
  */
 public enum UIPanelType
 {
-    GameStart,
+    GamePrepare,
     SexSelection,
     ClothOptions,
     Gaming

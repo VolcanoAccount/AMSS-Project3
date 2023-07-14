@@ -1,18 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SexSelectionPanel : BasePanel
 {
-    // Start is called before the first frame update
+    Button maleBtn;
+    Button femaleBtn;
+
     void Start()
     {
-        
+        maleBtn=transform.Find("MaleBtn").GetComponent<Button>();
+        maleBtn.onClick.AddListener(OnClickMaleBtn);
+        femaleBtn=transform.Find("FemaleBtn").GetComponent<Button>();
+        femaleBtn.onClick.AddListener(OnClickMaleBtn);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnEnter()
     {
-        
+        base.OnEnter();
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    public override void OnPause()
+    {
+        canvasGroup.blocksRaycasts = false;
+    }
+    public override void OnResume()
+    {
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    void OnClickMaleBtn()
+    {
+        UIManager.Instance.PushPanel(UIPanelType.ClothOptions);
     }
 }

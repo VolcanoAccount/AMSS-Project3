@@ -8,8 +8,8 @@ public enum GameState
     //默认
     None,
     GameGuid,
+    GamePrepare,
     Gaming,
-    Paused,
     GameOver
 }
 
@@ -69,7 +69,7 @@ public class GameStateController
         //基于新状态 获得一个新的状态对象
         CurrentObj = GetStateObj<K>(newState);
         CurrentObj.OnEnter();
-        Debug.Log(stateDic.Count);
+        Debug.Log(currentState);
     }
 
     /// <summary>

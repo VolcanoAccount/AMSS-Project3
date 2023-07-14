@@ -10,17 +10,13 @@ namespace AMSS
     {
         public static GameManager instance { get; private set; }
 
-        public UIManager uIManager { get; private set; }
-
-        public KinectManager kinectManager { get; private set; }
-
         public GameStateController gameController;
 
-        public GameObject kinectControllerPrefab;
+        public GameObject kinectControllerGO;
         public GameObject kinectCanvasPrefab;
-        Transform kinectCanvasTF;
-        public GameObject GuidVideoPrefab;
-        GameObject GuidVideoGO;
+        public Transform kinectCanvasTF;
+
+        public bool isStart;
 
         private void Awake()
         {
@@ -29,35 +25,15 @@ namespace AMSS
                 instance = this;
             }
 
-            if (uIManager == null)
-            {
-                uIManager = UIManager.Instance;
-            }
-
-            if (kinectManager == null)
-            {
-                kinectManager = KinectManager.Instance;
-            }
             if (gameController == null)
             {
-                gameController=GameStateController.Instance;
+                gameController = GameStateController.Instance;
             }
         }
 
         void Start()
         {
-            // if (kinectManager && KinectManager.IsKinectInitialized())
-            // {
-
-            // }
-            GameObject.Instantiate<GameObject>(kinectControllerPrefab);
-            kinectCanvasTF = GameObject.Instantiate<GameObject>(kinectCanvasPrefab).transform;
-            GuidVideoGO = GameObject.Instantiate<GameObject>(GuidVideoPrefab);
-            GuidVideoGO.SetActive(false);
-            InteractionManager.Instance.guiHandCursor = kinectCanvasTF.Find("GUICursor").GetComponent<Image>();
-
-            uIManager.PushPanel(UIPanelType.GameStart);
-
+            gameController.ChangeState<GameGuid>(GameState.GameGuid);
         }
 
         void Update()
@@ -65,9 +41,12 @@ namespace AMSS
             gameController.OnUpdate();
         }
 
-        public void PlayGuidVideo()
+        //初始化Kinect配置
+        public void InitKinect()
         {
-            GuidVideoGO.SetActive(true);
+            kinectControllerGO=GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GameObject/KinectController"));
+            kinectCanvasTF = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/UI/KinectCanvas")).transform;
+            InteractionManager.Instance.guiHandCursor = kinectCanvasTF.Find("GUICursor").GetComponent<Image>();
         }
     }
 }

@@ -1,21 +1,21 @@
-﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameStartPanel : BasePanel
+public class GamePreparePanel : BasePanel
 {
-
+    Button testBtn;
     void Start()
     {
-
+        testBtn=transform.Find("Button").GetComponent<Button>();
+        testBtn.onClick.AddListener(OnClickTestBtn);
     }
 
     public override void OnEnter()
     {
         base.OnEnter();
-        UIManager.Instance.SetPanelAsFirstSibling(transform);
+        canvasGroup.blocksRaycasts = true;
     }
 
     public override void OnPause()
@@ -25,5 +25,10 @@ public class GameStartPanel : BasePanel
     public override void OnResume()
     {
         canvasGroup.blocksRaycasts = true;
+    }
+
+    void OnClickTestBtn()
+    {
+        GameStateController.Instance.ChangeState<Gaming>(GameState.Gaming);
     }
 }

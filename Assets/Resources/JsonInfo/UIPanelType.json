@@ -2,10 +2,6 @@
 	"infoList":
 	[
 		{
-			"panelTypeString":"GameStart",
-			"path":"Prefabs/UI/GameStartPanel"
-		},
-		{
 			"panelTypeString":"SexSelection",
 			"path":"Prefabs/UI/SexSelectionPanel"
 		},
@@ -16,6 +12,10 @@
 		{
 			"panelTypeString":"Gaming",
 			"path":"Prefabs/UI/GamingPanel"
+		},
+		{
+			"panelTypeString":"GamePrepare",
+			"path":"Prefabs/UI/GamePreparePanel"
 		}
 	]
 }
