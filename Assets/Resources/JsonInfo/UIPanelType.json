@@ -1,0 +1,21 @@
+{
+	"infoList":
+	[
+		{
+			"panelTypeString":"GameStart",
+			"path":"Prefabs/UI/GameStartPanel"
+		},
+		{
+			"panelTypeString":"SexSelection",
+			"path":"Prefabs/UI/SexSelectionPanel"
+		},
+		{
+			"panelTypeString":"ClothOptions",
+			"path":"Prefabs/UI/ClothOptionsPanel"
+		},
+		{
+			"panelTypeString":"Gaming",
+			"path":"Prefabs/UI/GamingPanel"
+		}
+	]
+}
