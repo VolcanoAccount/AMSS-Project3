@@ -49,6 +49,8 @@ namespace AMSS
             InteractionManager.Instance.guiHandCursor = kinectCanvasTF.Find("GUICursor").GetComponent<Image>();
             PlayerGestureListener.Instance.gestureInfo=kinectCanvasTF.Find("GestureInfo").GetComponent<Text>();
         }
+
+        
     }
 }
 

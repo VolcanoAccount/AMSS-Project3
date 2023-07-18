@@ -27,8 +27,10 @@ public class PlayerManager
         }
     }
 
-    PlayerManager()
+    public void SetSex(Sex sex)
     {
-        sex=0;
+        this.sex=sex;
+        Debug.Log("玩家是"+sex);
     }
+
 }

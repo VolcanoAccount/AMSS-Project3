@@ -13,7 +13,7 @@ public class SexSelectionPanel : BasePanel
         maleBtn=transform.Find("MaleBtn").GetComponent<Button>();
         maleBtn.onClick.AddListener(OnClickMaleBtn);
         femaleBtn=transform.Find("FemaleBtn").GetComponent<Button>();
-        femaleBtn.onClick.AddListener(OnClickMaleBtn);
+        femaleBtn.onClick.AddListener(OnClickFemaleBtn);
     }
 
     public override void OnEnter()
@@ -33,6 +33,12 @@ public class SexSelectionPanel : BasePanel
 
     void OnClickMaleBtn()
     {
+        PlayerManager.Instance.SetSex(Sex.Male);
+        UIManager.Instance.PushPanel(UIPanelType.ClothOptions);
+    }
+    void OnClickFemaleBtn()
+    {
+        PlayerManager.Instance.SetSex(Sex.Female);
         UIManager.Instance.PushPanel(UIPanelType.ClothOptions);
     }
 }

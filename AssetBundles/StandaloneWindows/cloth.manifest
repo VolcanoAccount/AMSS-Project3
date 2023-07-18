@@ -1,0 +1,44 @@
+ManifestFileVersion: 0
+CRC: 2672303820
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4feae15bda17f8d5142024af29b8cf88
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f267fd2d8bcb1179236b6179ac5313bc
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10022.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10020.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10004.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10012.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10008.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10017.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10013.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10025.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10010.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10002.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10011.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10026.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10024.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10016.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10007.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10015.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10005.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10001.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10009.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10021.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10006.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10018.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10019.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10023.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10003.png"
+- "Assets/Art/UI/\u6C11\u65CF\u670D\u9970png/10014.png"
+Dependencies: []
