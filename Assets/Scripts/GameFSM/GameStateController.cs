@@ -69,7 +69,7 @@ public class GameStateController
         //基于新状态 获得一个新的状态对象
         CurrentObj = GetStateObj<K>(newState);
         CurrentObj.OnEnter();
-        Debug.Log(currentState);
+        Debug.Log("GameState："+currentState);
     }
 
     /// <summary>

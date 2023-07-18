@@ -5,78 +5,78 @@
             "ID": 10001,
             "Name": "阿昌族",
             "Sex": 2,
-            "Suit": "[10001;10002;10003]",
-            "visable": false
+            "Suit": [10001,10002,10003],
+            "Visable": false
         },
         {
             "ID": 10002,
             "Name": "布依族",
             "Sex": 2,
-            "Suit": "[10004;10005]",
-            "visable": false
+            "Suit": [10004,10005],
+            "Visable": false
         },
         {
             "ID": 10003,
             "Name": "傣族",
             "Sex": 1,
-            "Suit": 10006,
-            "visable": false
+            "Suit": [10006],
+            "Visable": false
         },
         {
             "ID": 10004,
             "Name": "傣族",
             "Sex": 2,
-            "Suit": "[10007;10008;10009]",
-            "visable": false
+            "Suit": [10007,10008,10009],
+            "Visable": false
         },
         {
             "ID": 10005,
             "Name": "基诺族",
             "Sex": 2,
-            "Suit": "[10010;10011]",
-            "visable": false
+            "Suit": [10010,10011],
+            "Visable": false
         },
         {
             "ID": 10006,
             "Name": "拉祜族",
             "Sex": 2,
-            "Suit": "[10012;10013]",
-            "visable": false
+            "Suit": [10012,10013],
+            "Visable": false
         },
         {
             "ID": 10007,
             "Name": "傈傈族",
             "Sex": 2,
-            "Suit": "[10014;10015;10016]",
-            "visable": false
+            "Suit": [10014,10015,10016],
+            "Visable": false
         },
         {
             "ID": 10008,
             "Name": "毛南族",
             "Sex": 2,
-            "Suit": "[10017;10018]",
-            "visable": false
+            "Suit": [10017,10018],
+            "Visable": false
         },
         {
             "ID": 10009,
             "Name": "普米族",
             "Sex": 1,
-            "Suit": "[10019;10020]",
-            "visable": false
+            "Suit": [10019,10020],
+            "Visable": false
         },
         {
             "ID": 10010,
             "Name": "普米族",
             "Sex": 2,
-            "Suit": "[10021;10022;10023]",
-            "visable": false
+            "Suit": [10021,10022,10023],
+            "Visable": false
         },
         {
             "ID": 10011,
             "Name": "芜族",
             "Sex": 2,
-            "Suit": "[10024;10025;10026]",
-            "visable": false
+            "Suit": [10024,10025,10026],
+            "Visable": false
         }
     ]
 }

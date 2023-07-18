@@ -8,8 +8,8 @@ public class GamePreparePanel : BasePanel
     Button testBtn;
     void Start()
     {
-        testBtn=transform.Find("Button").GetComponent<Button>();
-        testBtn.onClick.AddListener(OnClickTestBtn);
+        testBtn=transform.Find("StartButton").GetComponent<Button>();
+        testBtn.onClick.AddListener(OnClickStartBtn);
     }
 
     public override void OnEnter()
@@ -27,7 +27,7 @@ public class GamePreparePanel : BasePanel
         canvasGroup.blocksRaycasts = true;
     }
 
-    void OnClickTestBtn()
+    void OnClickStartBtn()
     {
         GameStateController.Instance.ChangeState<Gaming>(GameState.Gaming);
     }

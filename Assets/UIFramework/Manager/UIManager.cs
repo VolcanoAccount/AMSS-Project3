@@ -44,8 +44,6 @@ public class UIManager
     //解析Json文件
     void ParseUIPanelTypeJson()
     {
-        // TextAsset ta= Resources.Load<TextAsset>("TextInfo/UIPanelType");
-        // UIPanelTypeJosn jsonObject = JsonUtility.FromJson<UIPanelTypeJosn>(ta.text);
         UIPanelTypeJosn jsonObject = JsonParser<UIPanelTypeJosn>.Parse("JsonInfo/UIPanelType");
         foreach (var item in jsonObject.infoList)
         {

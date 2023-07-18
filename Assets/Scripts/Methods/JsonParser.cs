@@ -12,8 +12,16 @@ namespace AMSS
         public static T Parse(string jsonFilePath)
         {
             TextAsset ta = Resources.Load<TextAsset>(jsonFilePath);
-            T jsonObject = JsonUtility.FromJson<T>(ta.text);
-            return jsonObject;
+            if (ta == null)
+            {
+                Debug.LogWarning("请检查路径是否正确！");
+                return default(T);
+            }
+            else
+            {
+                T jsonObject = JsonUtility.FromJson<T>(ta.text);
+                return jsonObject;
+            }
         }
     }
 }

@@ -4,16 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class UIPanelInfo:ObjectInfoBase
+public class UIPanelInfo:ISerializationCallbackReceiver
 {
     [NonSerialized]
     public UIPanelType uIPanelType;
     public string panelTypeString;
     public string path;
 
-    public override void OnAfterDeserialize()
+    public void OnAfterDeserialize()
     {
         uIPanelType=(UIPanelType)System.Enum.Parse(typeof(UIPanelType), panelTypeString);
+    }
+
+    public void OnBeforeSerialize()
+    {
+        
     }
 }
 

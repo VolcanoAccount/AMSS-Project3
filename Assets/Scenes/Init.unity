@@ -260,7 +260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09608c4dbc3f8f94d8c14d9f300b997d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kinectControllerGO: {fileID: 0}
   kinectCanvasPrefab: {fileID: 687128875536988938, guid: 867865c3c81d9644483f41d0935b9667, type: 3}
+  kinectCanvasTF: {fileID: 0}
   isStart: 0
 --- !u!1 &2022196817
 GameObject:

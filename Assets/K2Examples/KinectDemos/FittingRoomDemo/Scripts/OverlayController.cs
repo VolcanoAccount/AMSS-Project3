@@ -69,7 +69,6 @@ public class OverlayController : MonoBehaviour
 				manager.autoHeightAngle == KinectManager.AutoHeightAngle.AutoUpdateAndShowInfo) // ||
 			   //currentCameraOffset != adjustedCameraOffset)
 			{
-				Debug.Log("1111");
 				// update the cameras automatically, according to the current sensor height and angle
 				if(foregroundCamera != null && sensorData != null)
 				{

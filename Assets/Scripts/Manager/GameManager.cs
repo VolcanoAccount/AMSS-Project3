@@ -47,6 +47,7 @@ namespace AMSS
             kinectControllerGO=GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GameObject/KinectController"));
             kinectCanvasTF = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/UI/KinectCanvas")).transform;
             InteractionManager.Instance.guiHandCursor = kinectCanvasTF.Find("GUICursor").GetComponent<Image>();
+            PlayerGestureListener.Instance.gestureInfo=kinectCanvasTF.Find("GestureInfo").GetComponent<Text>();
         }
     }
 }

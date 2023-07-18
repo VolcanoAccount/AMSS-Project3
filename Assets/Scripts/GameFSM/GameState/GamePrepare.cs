@@ -5,7 +5,6 @@ using AMSS;
 
 public class GamePrepare : StateBase
 {
-    
     public override void OnEnter()
     {
         if (gameManager.kinectControllerGO == null)
@@ -22,6 +21,9 @@ public class GamePrepare : StateBase
 
     public override void OnUpdate()
     {
-        //TODO:检测玩家TPose
+        if(KinectManager.Instance.IsUserDetected())
+        {
+            gameController.ChangeState<Gaming>(GameState.Gaming);
+        }
     }
 }
