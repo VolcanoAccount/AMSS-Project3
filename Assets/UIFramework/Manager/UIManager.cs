@@ -120,7 +120,7 @@ public class UIManager
         BasePanel panel = GetPanel(uIPanelType);
         panelStack.Push(panel);
         panel.OnEnter();
-        //Debug.Log("栈中数据长度" + panelStack.Count);
+        Debug.Log("UI面板栈中数据长度" + panelStack.Count);
     }
 
     /// <summary>

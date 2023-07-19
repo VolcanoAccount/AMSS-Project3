@@ -5,22 +5,23 @@ using AMSS;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClothOptionsPanel : BasePanel
+public class ClothesOptionsPanel : BasePanel
 {
     public int clothIdex = 0;
-    AssetBundle clothAB;
+    AssetBundle clothesAB;
     Image body;
     Image hair;
     Image tire;
     Button confirmBtn;
     Button forwardBtn;
     Button backwardBtn;
+    Button returnBtn;
 
     ClothesInfoJson clothesInfoJson;
     ClothesPosInfoJson clothesPosInfoJson;
 
     Dictionary<int, int> clothesPosInfoDic = new Dictionary<int, int>();
-    List<Cloth> cloths = new List<Cloth>();
+    List<Clothes> cloths = new List<Clothes>();
 
 
     #region 面板周期函数
@@ -28,17 +29,20 @@ public class ClothOptionsPanel : BasePanel
     {
         base.OnEnter();
         canvasGroup.blocksRaycasts = true;
-        clothAB = AssetBundle.LoadFromFile(Application.streamingAssetsPath + "/" + "cloth");
+        canvasGroup.alpha = 1;
+        clothIdex = 0;
 
-        body = transform.Find("Clothes/Body").GetComponent<Image>();
-        hair = transform.Find("Clothes/Hair").GetComponent<Image>();
-        tire = transform.Find("Clothes/Tire").GetComponent<Image>();
+        if (clothesAB == null) clothesAB = AssetBundle.LoadFromFile(Application.streamingAssetsPath + "/" + "cloth");
+
+        if (body == null) body = transform.Find("Clothes/Body").GetComponent<Image>();
+        if (hair == null) hair = transform.Find("Clothes/Hair").GetComponent<Image>();
+        if (tire == null) tire = transform.Find("Clothes/Tire").GetComponent<Image>();
 
         if (clothesInfoJson == null && clothesPosInfoJson == null)
         {
             ParseClothesInfoJson();
         }
-
+        InitClothList();
         GenerationClothing(clothIdex);
     }
 
@@ -47,6 +51,9 @@ public class ClothOptionsPanel : BasePanel
         confirmBtn = transform.Find("ConfirmBtn").GetComponent<Button>();
         forwardBtn = transform.Find("ForwardBtn").GetComponent<Button>();
         backwardBtn = transform.Find("BackwardBtn").GetComponent<Button>();
+        returnBtn = transform.Find("ReturnBtn").GetComponent<Button>();
+        confirmBtn.onClick.AddListener(OnClickConfirmBtn);
+        returnBtn.onClick.AddListener(OnClickReturnBtn);
         forwardBtn.onClick.AddListener(() => { SwitchClothes(1); });
         backwardBtn.onClick.AddListener(() => { SwitchClothes(0); });
     }
@@ -69,12 +76,18 @@ public class ClothOptionsPanel : BasePanel
     public override void OnResume()
     {
         canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1;
+    }
+    public override void OnExit()
+    {
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0;
     }
     #endregion
 
 
 
-    //解析服装主配置表
+    //解析服装配置表
     void ParseClothesInfoJson()
     {
         clothesInfoJson = JsonParser<ClothesInfoJson>.Parse("JsonInfo/ClothesInfoJson");
@@ -83,11 +96,18 @@ public class ClothOptionsPanel : BasePanel
         {
             clothesPosInfoDic.Add(item.AssetName, item.Type);
         }
+    }
+
+    public void InitClothList()
+    {
+        cloths.Clear();
+        Debug.Log("添加服装前链表的大小：" + cloths.Count);
+
         foreach (var item in clothesInfoJson.ClothesInfoList)
         {
             if (item.Sex == (int)PlayerManager.Instance.sex)
             {
-                Cloth cloth = new Cloth();
+                Clothes cloth = new Clothes();
                 cloth.sex = item.Sex;
                 cloth.name = item.Name;
                 foreach (int assetName in item.Suit)
@@ -112,8 +132,8 @@ public class ClothOptionsPanel : BasePanel
                 cloths.Add(cloth);
             }
         }
+        Debug.Log("添加服装后链表的大小：" + cloths.Count);
     }
-
     public void GenerationClothing(int index)
     {
         tire.gameObject.SetActive(false);
@@ -128,20 +148,20 @@ public class ClothOptionsPanel : BasePanel
             if (cloths[index].bodyAsset != 0)
             {
                 body.gameObject.SetActive(true);
-                body.sprite = clothAB.LoadAsset<Sprite>(cloths[index].bodyAsset.ToString());
+                body.sprite = clothesAB.LoadAsset<Sprite>(cloths[index].bodyAsset.ToString());
             }
             if (cloths[index].hairAsset != 0)
             {
                 hair.gameObject.SetActive(true);
-                hair.sprite = clothAB.LoadAsset<Sprite>(cloths[index].hairAsset.ToString());
+                hair.sprite = clothesAB.LoadAsset<Sprite>(cloths[index].hairAsset.ToString());
             }
             if (cloths[index].tireAsset != 0)
             {
                 tire.gameObject.SetActive(true);
-                tire.sprite = clothAB.LoadAsset<Sprite>(cloths[index].tireAsset.ToString());
+                tire.sprite = clothesAB.LoadAsset<Sprite>(cloths[index].tireAsset.ToString());
             }
         }
-        Debug.Log(cloths[index].name);
+        Debug.Log("当前服装是：" + cloths[index].name);
     }
 
     public void SwitchClothes(int judge)
@@ -157,17 +177,28 @@ public class ClothOptionsPanel : BasePanel
         else
         {
             clothIdex--;
-            if (clothIdex <0)
+            if (clothIdex < 0)
             {
-                clothIdex = cloths.Count-1;
+                clothIdex = cloths.Count - 1;
             }
         }
 
         GenerationClothing(clothIdex);
     }
+
+    void OnClickConfirmBtn()
+    {
+        PlayerManager.Instance.SetCloth(cloths[clothIdex]);
+        UIManager.Instance.PushPanel(UIPanelType.Gaming);
+    }
+
+    void OnClickReturnBtn()
+    {
+        UIManager.Instance.PopPanel();
+    }
 }
 
-class Cloth
+public class Clothes
 {
     public string name;
     public int sex;

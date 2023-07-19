@@ -20,6 +20,7 @@ public class SexSelectionPanel : BasePanel
     {
         base.OnEnter();
         canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1;
     }
 
     public override void OnPause()
@@ -30,15 +31,20 @@ public class SexSelectionPanel : BasePanel
     {
         canvasGroup.blocksRaycasts = true;
     }
+    public override void OnExit()
+    {
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0;
+    }
 
     void OnClickMaleBtn()
     {
         PlayerManager.Instance.SetSex(Sex.Male);
-        UIManager.Instance.PushPanel(UIPanelType.ClothOptions);
+        UIManager.Instance.PushPanel(UIPanelType.ClothesOptions);
     }
     void OnClickFemaleBtn()
     {
         PlayerManager.Instance.SetSex(Sex.Female);
-        UIManager.Instance.PushPanel(UIPanelType.ClothOptions);
+        UIManager.Instance.PushPanel(UIPanelType.ClothesOptions);
     }
 }

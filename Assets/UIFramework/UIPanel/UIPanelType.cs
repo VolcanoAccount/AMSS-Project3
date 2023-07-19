@@ -20,6 +20,6 @@ public enum UIPanelType
 {
     GamePrepare,
     SexSelection,
-    ClothOptions,
+    ClothesOptions,
     Gaming
 }

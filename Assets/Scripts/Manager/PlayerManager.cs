@@ -12,7 +12,11 @@ public enum Sex
 public class PlayerManager
 {
     //TODO:玩家数据管理类完善
+    //玩家性别
     public Sex sex { get; private set; }
+
+    //玩家选择的服装
+    public Clothes chooseClothes{get;private set;}
 
     private static PlayerManager instance;
     public static PlayerManager Instance
@@ -29,8 +33,13 @@ public class PlayerManager
 
     public void SetSex(Sex sex)
     {
-        this.sex=sex;
-        Debug.Log("玩家是"+sex);
+        this.sex = sex;
+        Debug.Log("玩家是" + sex);
     }
 
+    public void SetCloth(Clothes clothes)
+    {
+        chooseClothes=clothes;
+        Debug.Log("玩家选择的服装是:"+clothes.name);
+    }
 }

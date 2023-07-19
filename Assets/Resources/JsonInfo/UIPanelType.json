@@ -6,8 +6,8 @@
 			"path":"Prefabs/UI/SexSelectionPanel"
 		},
 		{
-			"panelTypeString":"ClothOptions",
-			"path":"Prefabs/UI/ClothOptionsPanel"
+			"panelTypeString":"ClothesOptions",
+			"path":"Prefabs/UI/ClothesOptionsPanel"
 		},
 		{
 			"panelTypeString":"Gaming",
