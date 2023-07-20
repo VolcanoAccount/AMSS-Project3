@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class ClothesOptionsPanel : BasePanel
 {
     public int clothIdex = 0;
-    AssetBundle clothesAB;
+    // AssetBundle clothesAB;
     Image body;
     Image hair;
     Image tire;
@@ -32,7 +32,7 @@ public class ClothesOptionsPanel : BasePanel
         canvasGroup.alpha = 1;
         clothIdex = 0;
 
-        if (clothesAB == null) clothesAB = AssetBundle.LoadFromFile(Application.streamingAssetsPath + "/" + "cloth");
+        AssetBundleManager.Instance.LoadAssetBundle("cloth");
 
         if (body == null) body = transform.Find("Clothes/Body").GetComponent<Image>();
         if (hair == null) hair = transform.Find("Clothes/Hair").GetComponent<Image>();
@@ -148,17 +148,17 @@ public class ClothesOptionsPanel : BasePanel
             if (cloths[index].bodyAsset != 0)
             {
                 body.gameObject.SetActive(true);
-                body.sprite = clothesAB.LoadAsset<Sprite>(cloths[index].bodyAsset.ToString());
+                body.sprite=AssetBundleManager.Instance.LoadAsset<Sprite>("cloth",cloths[index].bodyAsset.ToString());
             }
             if (cloths[index].hairAsset != 0)
             {
                 hair.gameObject.SetActive(true);
-                hair.sprite = clothesAB.LoadAsset<Sprite>(cloths[index].hairAsset.ToString());
+                hair.sprite=AssetBundleManager.Instance.LoadAsset<Sprite>("cloth",cloths[index].hairAsset.ToString());
             }
             if (cloths[index].tireAsset != 0)
             {
                 tire.gameObject.SetActive(true);
-                tire.sprite = clothesAB.LoadAsset<Sprite>(cloths[index].tireAsset.ToString());
+                tire.sprite=AssetBundleManager.Instance.LoadAsset<Sprite>("cloth",cloths[index].tireAsset.ToString());
             }
         }
         Debug.Log("当前服装是：" + cloths[index].name);

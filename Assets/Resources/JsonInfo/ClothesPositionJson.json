@@ -18,12 +18,12 @@
         },
         {
             "ID": 10004,
-            "Type": 1,
+            "Type": 2,
             "AssetName": 10004
         },
         {
             "ID": 10005,
-            "Type": 2,
+            "Type": 3,
             "AssetName": 10005
         },
         {
@@ -48,22 +48,22 @@
         },
         {
             "ID": 10010,
-            "Type": 1,
+            "Type": 2,
             "AssetName": 10010
         },
         {
             "ID": 10011,
-            "Type": 2,
+            "Type": 3,
             "AssetName": 10011
         },
         {
             "ID": 10012,
-            "Type": 1,
+            "Type": 2,
             "AssetName": 10012
         },
         {
             "ID": 10013,
-            "Type": 2,
+            "Type": 3,
             "AssetName": 10013
         },
         {
@@ -93,7 +93,7 @@
         },
         {
             "ID": 10019,
-            "Type": 1,
+            "Type": 2,
             "AssetName": 10019
         },
         {
@@ -103,12 +103,12 @@
         },
         {
             "ID": 10021,
-            "Type": 1,
+            "Type": 2,
             "AssetName": 10021
         },
         {
             "ID": 10022,
-            "Type": 2,
+            "Type": 1,
             "AssetName": 10022
         },
         {
