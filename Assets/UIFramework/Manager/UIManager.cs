@@ -31,6 +31,8 @@ public class UIManager
             if (sceneCanvasTF == null)
             {
                 sceneCanvasTF = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/SceneCanvas")).transform;
+                sceneCanvasTF.GetComponent<Canvas>().renderMode=RenderMode.ScreenSpaceCamera;
+                sceneCanvasTF.GetComponent<Canvas>().worldCamera=Camera.main;
             }
             return sceneCanvasTF;
         }

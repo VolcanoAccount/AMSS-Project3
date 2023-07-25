@@ -8,20 +8,16 @@ using UnityEngine.UI;
 public class ClothesOptionsPanel : BasePanel
 {
     public int clothIdex = 0;
-    // AssetBundle clothesAB;
-    Image body;
-    Image hair;
-    Image tire;
+
+
+    Image clothesImage;
     Button confirmBtn;
     Button forwardBtn;
     Button backwardBtn;
     Button returnBtn;
 
     ClothesInfoJson clothesInfoJson;
-    ClothesPosInfoJson clothesPosInfoJson;
-
-    Dictionary<int, int> clothesPosInfoDic = new Dictionary<int, int>();
-    List<Clothes> cloths = new List<Clothes>();
+    List<Clothes> clothesList = new List<Clothes>();
 
 
     #region 面板周期函数
@@ -34,14 +30,15 @@ public class ClothesOptionsPanel : BasePanel
 
         AssetBundleManager.Instance.LoadAssetBundle("cloth");
 
-        if (body == null) body = transform.Find("Clothes/Body").GetComponent<Image>();
-        if (hair == null) hair = transform.Find("Clothes/Hair").GetComponent<Image>();
-        if (tire == null) tire = transform.Find("Clothes/Tire").GetComponent<Image>();
-
-        if (clothesInfoJson == null && clothesPosInfoJson == null)
+        if (clothesInfoJson == null)
         {
             ParseClothesInfoJson();
         }
+        if (clothesImage == null)
+        {
+            clothesImage=transform.Find("Clothes").GetComponent<Image>();
+        }
+
         InitClothList();
         GenerationClothing(clothIdex);
     }
@@ -91,77 +88,29 @@ public class ClothesOptionsPanel : BasePanel
     void ParseClothesInfoJson()
     {
         clothesInfoJson = JsonParser<ClothesInfoJson>.Parse("JsonInfo/ClothesInfoJson");
-        clothesPosInfoJson = JsonParser<ClothesPosInfoJson>.Parse("JsonInfo/ClothesPositionJson");
-        foreach (var item in clothesPosInfoJson.ClothesPosinfoList)
-        {
-            clothesPosInfoDic.Add(item.AssetName, item.Type);
-        }
     }
 
     public void InitClothList()
     {
-        cloths.Clear();
-        Debug.Log("添加服装前链表的大小：" + cloths.Count);
-
+        clothesList.Clear();
+        Debug.Log("添加服装前链表的大小：" + clothesList.Count);
         foreach (var item in clothesInfoJson.ClothesInfoList)
         {
             if (item.Sex == (int)PlayerManager.Instance.sex)
             {
-                Clothes cloth = new Clothes();
-                cloth.sex = item.Sex;
-                cloth.name = item.Name;
-                foreach (int assetName in item.Suit)
-                {
-                    int type;
-                    clothesPosInfoDic.TryGetValue(assetName, out type);
-                    switch (type)
-                    {
-                        case 1:
-                            cloth.hairAsset = assetName;
-                            break;
-                        case 2:
-                            cloth.tireAsset = assetName;
-                            break;
-                        case 3:
-                            cloth.bodyAsset = assetName;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                cloths.Add(cloth);
+                Clothes clothes = new Clothes();
+                clothes.sex = item.Sex;
+                clothes.name = item.Name;
+                clothes.assetName = item.AssetName;
+                clothesList.Add(clothes);
             }
         }
-        Debug.Log("添加服装后链表的大小：" + cloths.Count);
+        Debug.Log("添加服装后链表的大小：" + clothesList.Count);
     }
     public void GenerationClothing(int index)
     {
-        tire.gameObject.SetActive(false);
-        hair.gameObject.SetActive(false);
-        body.gameObject.SetActive(false);
-        if (index >= cloths.Count)
-        {
-            Debug.LogError("服装下标越界，请传入正确的下标！");
-        }
-        else
-        {
-            if (cloths[index].bodyAsset != 0)
-            {
-                body.gameObject.SetActive(true);
-                body.sprite=AssetBundleManager.Instance.LoadAsset<Sprite>("cloth",cloths[index].bodyAsset.ToString());
-            }
-            if (cloths[index].hairAsset != 0)
-            {
-                hair.gameObject.SetActive(true);
-                hair.sprite=AssetBundleManager.Instance.LoadAsset<Sprite>("cloth",cloths[index].hairAsset.ToString());
-            }
-            if (cloths[index].tireAsset != 0)
-            {
-                tire.gameObject.SetActive(true);
-                tire.sprite=AssetBundleManager.Instance.LoadAsset<Sprite>("cloth",cloths[index].tireAsset.ToString());
-            }
-        }
-        Debug.Log("当前服装是：" + cloths[index].name);
+        clothesImage.sprite=AssetBundleManager.Instance.LoadAsset<Sprite>("cloth", clothesList[index].assetName.ToString());
+        Debug.Log("当前服装是：" + clothesList[index].name);
     }
 
     public void SwitchClothes(int judge)
@@ -169,7 +118,7 @@ public class ClothesOptionsPanel : BasePanel
         if (judge > 0)
         {
             clothIdex++;
-            if (clothIdex >= cloths.Count)
+            if (clothIdex >= clothesList.Count)
             {
                 clothIdex = 0;
             }
@@ -179,7 +128,7 @@ public class ClothesOptionsPanel : BasePanel
             clothIdex--;
             if (clothIdex < 0)
             {
-                clothIdex = cloths.Count - 1;
+                clothIdex = clothesList.Count - 1;
             }
         }
 
@@ -188,7 +137,7 @@ public class ClothesOptionsPanel : BasePanel
 
     void OnClickConfirmBtn()
     {
-        PlayerManager.Instance.SetCloth(cloths[clothIdex]);
+        PlayerManager.Instance.SetCloth(clothesList[clothIdex]);
         UIManager.Instance.PushPanel(UIPanelType.Gaming);
     }
 
@@ -197,12 +146,9 @@ public class ClothesOptionsPanel : BasePanel
         UIManager.Instance.PopPanel();
     }
 }
-
 public class Clothes
 {
     public string name;
     public int sex;
-    public int bodyAsset;
-    public int hairAsset;
-    public int tireAsset;
+    public int assetName;
 }

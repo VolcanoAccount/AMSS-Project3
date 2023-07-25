@@ -8,10 +8,10 @@ public class GamingPanel : BasePanel
 {
     SetFaceTexture setFaceTexture;
     Button returnBtn;
-    Image body;
-    Image hair;
-    Image tire;
+    Button photoBtn;
     RawImage userFaceTexRawIg;
+    GameObject clothesGO;
+    public Transform[] countdown=new Transform[3];
 
 
     #region  面板周期函数
@@ -20,13 +20,7 @@ public class GamingPanel : BasePanel
         base.OnEnter();
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1;
-
-
-        if (body == null) body = transform.Find("Clothes/Body").GetComponent<Image>();
-        if (hair == null) hair = transform.Find("Clothes/Hair").GetComponent<Image>();
-        if (tire == null) tire = transform.Find("Clothes/Tire").GetComponent<Image>();
-        if (userFaceTexRawIg == null) userFaceTexRawIg = transform.Find("Mask/UseFaceTex").GetComponent<RawImage>();
-        if (setFaceTexture == null) setFaceTexture = KinectManager.Instance.transform.GetComponent<SetFaceTexture>();
+        AssetBundleManager.Instance.LoadAssetBundle("clothesitem");
 
         GenerationClothing();
     }
@@ -34,10 +28,18 @@ public class GamingPanel : BasePanel
     {
         returnBtn = transform.Find("ReturnBtn").GetComponent<Button>();
         returnBtn.onClick.AddListener(OnClickReturnBtn);
+        photoBtn=transform.Find("PhotoBtn").GetComponent<Button>();
+        photoBtn.onClick.AddListener(OnClickPhotoBtn);
+        for (int i = 0; i < photoBtn.transform.childCount; i++)
+        {
+            // 获取子物体的Transform
+            Transform childTransform = photoBtn.transform.GetChild(i);  
+            countdown[i]=childTransform;
+        }
     }
     void Update()
     {
-        userFaceTexRawIg.texture =setFaceTexture.GetFaceTex();
+        if (userFaceTexRawIg != null) userFaceTexRawIg.texture = setFaceTexture.GetFaceTex();
     }
     public override void OnPause()
     {
@@ -49,6 +51,7 @@ public class GamingPanel : BasePanel
     }
     public override void OnExit()
     {
+        GameObject.Destroy(clothesGO);
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0;
     }
@@ -57,31 +60,18 @@ public class GamingPanel : BasePanel
     void GenerationClothing()
     {
         Clothes clothes = PlayerManager.Instance.chooseClothes;
-        tire.gameObject.SetActive(false);
-        hair.gameObject.SetActive(false);
-        body.gameObject.SetActive(false);
-        if (clothes != null)
-        {
-            if (clothes.bodyAsset != 0)
-            {
-                body.gameObject.SetActive(true);
-                body.sprite = AssetBundleManager.Instance.LoadAsset<Sprite>("cloth", clothes.bodyAsset.ToString());
-            }
-            if (clothes.hairAsset != 0)
-            {
-                hair.gameObject.SetActive(true);
-                hair.sprite = AssetBundleManager.Instance.LoadAsset<Sprite>("cloth", clothes.hairAsset.ToString());
-            }
-            if (clothes.tireAsset != 0)
-            {
-                tire.gameObject.SetActive(true);
-                tire.sprite = AssetBundleManager.Instance.LoadAsset<Sprite>("cloth", clothes.tireAsset.ToString());
-            }
-        }
+        clothesGO= GameObject.Instantiate(AssetBundleManager.Instance.LoadAsset<GameObject>("clothesitem", clothes.assetName.ToString()), transform);
+        clothesGO.transform.SetAsFirstSibling();
+        if (userFaceTexRawIg == null) userFaceTexRawIg = clothesGO.transform.Find("Mask/UserFaceTex").GetComponent<RawImage>();
+        if (setFaceTexture == null) setFaceTexture = KinectManager.Instance.transform.GetComponent<SetFaceTexture>();
     }
 
     void OnClickReturnBtn()
     {
         UIManager.Instance.PopPanel();
+    }
+    void OnClickPhotoBtn()
+    {
+        PohtoShooter.CountdownAndMakePhoto(countdown,this,Camera.main);
     }
 }
