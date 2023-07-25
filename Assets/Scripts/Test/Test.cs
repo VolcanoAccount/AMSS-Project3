@@ -13,18 +13,12 @@ using System;
 
 public class Test : MonoBehaviour
 {
-
+    public Transform[] countdown;
     void Start()
     {
-        ClothesPosInfoJson wrapper =JsonParser<ClothesPosInfoJson>.Parse("JsonInfo/ClothesPositionJson");
-        Debug.Log(wrapper.ClothesPosinfoList);
+        // ClothesPosInfoJson wrapper =JsonParser<ClothesPosInfoJson>.Parse("JsonInfo/ClothesPositionJson");
+        // Debug.Log(wrapper.ClothesPosinfoList);
         // 遍历数组并输出信息
-        
+        PohtoShooter.CountdownAndMakePhoto(countdown,this,Camera.main);
     }
 }
-
-// [Serializable]
-// public class ClothesPosInfoJson
-// {
-//     public List<ClothesPosInfo> ClothesPosinfoList;
-// }

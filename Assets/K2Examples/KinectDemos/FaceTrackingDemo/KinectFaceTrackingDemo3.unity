@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  useTrackedFaceRect: 1
+  useTrackedFaceRect: 0
   faceWidth: 0.3
   faceHeight: 0.3
   targetObject: {fileID: 453366000}

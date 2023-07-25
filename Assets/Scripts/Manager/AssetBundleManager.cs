@@ -54,6 +54,7 @@ namespace AMSS
                 T asset = bundle.LoadAsset<T>(assetName);
                 return asset;
             }
+            Debug.LogWarning(assetName+"的资源不存在请检查资源名！");
             return null;
         }
 
