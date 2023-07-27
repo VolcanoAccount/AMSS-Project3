@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace AMSS
 {
@@ -10,13 +12,25 @@ namespace AMSS
         /// <summary>
         /// /// Counts down (from 3 for instance), then takes a picture and opens it
         /// </summary>
-        public static void CountdownAndMakePhoto(Transform[] countdown, MonoBehaviour monoBehaviour, Camera backroundCamera)
+        public static void CountdownAndMakePhoto(
+            Transform[] countdown,
+            MonoBehaviour monoBehaviour,
+            Camera backroundCamera,
+            Action<byte[]> callback
+        )
         {
-            monoBehaviour.StartCoroutine(CoCountdownAndMakePhoto(countdown, backroundCamera));
+            monoBehaviour.StartCoroutine(
+                CoCountdownAndMakePhoto(monoBehaviour, countdown, backroundCamera, callback)
+            );
         }
 
         // counts down (from 3 for instance), then takes a picture and opens it
-        private static IEnumerator CoCountdownAndMakePhoto(Transform[] countdown, Camera backroundCamera)
+        static IEnumerator CoCountdownAndMakePhoto(
+            MonoBehaviour monoBehaviour,
+            Transform[] countdown,
+            Camera backroundCamera,
+            Action<byte[]> callback
+        )
         {
             if (countdown != null && countdown.Length > 0)
             {
@@ -31,25 +45,17 @@ namespace AMSS
                         countdown[i].gameObject.SetActive(false);
                 }
             }
-
-            MakePhoto(backroundCamera);
+            byte[] photoByte = MakePhoto(monoBehaviour, backroundCamera);
+            callback?.Invoke(photoByte);
             yield return null;
         }
 
         /// <summary>
-        /// Saves the screen image as png picture, and then opens the saved file.
+        /// 截取屏幕图像为Texture2D，并返回Texture2D的字节数组
         /// </summary>
-        public static void MakePhoto(Camera backroundCamera)
-        {
-            MakePhoto(true, backroundCamera);
-        }
-
-        /// <summary>
-        /// Saves the screen image as png picture, and optionally opens the saved file.
-        /// </summary>
-        /// <returns>The file name.</returns>
-        /// <param name="openIt">If set to <c>true</c> opens the saved file.</param>
-        public static string MakePhoto(bool openIt, Camera backroundCamera)
+        /// <param name="backroundCamera">渲染图像的相机</param>
+        /// <returns>图像的二进制字节数组</returns>
+        public static byte[] MakePhoto(MonoBehaviour monoBehaviour, Camera backroundCamera)
         {
             int resWidth = Screen.width;
             int resHeight = Screen.height;
@@ -73,26 +79,13 @@ namespace AMSS
             // clean-up
             RenderTexture.active = prevActiveTex;
 
-            byte[] btScreenShot = screenShot.EncodeToJPG();
-
-            // save the screenshot as jpeg file
-            string sDirName = Application.persistentDataPath + "/Screenshots";
-            if (!Directory.Exists(sDirName))
-                Directory.CreateDirectory(sDirName);
-
-            string sFileName = sDirName + "/" + "/screenshot.jpg";
-            File.WriteAllBytes(sFileName, btScreenShot);
-
-            Debug.Log("Photo saved to: " + sFileName);
-
-            // open file
-            if (openIt)
-            {
-                System.Diagnostics.Process.Start(sFileName);
-            }
-
-            return sFileName;
+            byte[] btScreenShot = screenShot.EncodeToPNG();
+            ImageUploader.UploadImageToServer(
+                monoBehaviour,
+                "http://120.25.202.75:8084/imgUpDown",
+                btScreenShot
+            );
+            return btScreenShot;
         }
     }
 }
-

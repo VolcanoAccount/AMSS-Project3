@@ -16,6 +16,10 @@
 		{
 			"panelTypeString":"GamePrepare",
 			"path":"Prefabs/UI/GamePreparePanel"
+		},
+		{
+			"panelTypeString":"GameOver",
+			"path":"Prefabs/UI/GameOverPanel"
 		}
 	]
 }

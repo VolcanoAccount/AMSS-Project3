@@ -18,6 +18,8 @@ public class PlayerManager
     //玩家选择的服装
     public Clothes chooseClothes{get;private set;}
 
+    public Texture2D pohtoTex{get;private set;}
+
     private static PlayerManager instance;
     public static PlayerManager Instance
     {
@@ -41,5 +43,10 @@ public class PlayerManager
     {
         chooseClothes=clothes;
         Debug.Log("玩家选择的服装是:"+clothes.name);
+    }
+
+    public void SetPohto(Texture2D Tex)
+    {
+        pohtoTex=Tex;
     }
 }

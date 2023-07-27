@@ -72,6 +72,19 @@ public class GamingPanel : BasePanel
     }
     void OnClickPhotoBtn()
     {
-        PohtoShooter.CountdownAndMakePhoto(countdown,this,Camera.main);
+        //TODO:拍照画面清理
+        PohtoShooter.CountdownAndMakePhoto(countdown,this,Camera.main,OnPhotoTakenCallback);
+    }
+
+    /// <summary>
+    ///  图片拍摄完成后的回调函数
+    /// </summary>
+    /// <param name="photoByte">图片的二进制字节数组</param>
+    void OnPhotoTakenCallback(byte[] photoByte)
+    {
+        Texture2D texture = new Texture2D(1, 1);
+        texture.LoadImage(photoByte);
+        PlayerManager.Instance.SetPohto(texture);
+        UIManager.Instance.PushPanel(UIPanelType.GameOver);
     }
 }
