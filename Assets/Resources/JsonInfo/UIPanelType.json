@@ -18,8 +18,8 @@
 			"path":"Prefabs/UI/GamePreparePanel"
 		},
 		{
-			"panelTypeString":"GameOver",
-			"path":"Prefabs/UI/GameOverPanel"
+			"panelTypeString":"Photo",
+			"path":"Prefabs/UI/PhotoPanel"
 		}
 	]
 }

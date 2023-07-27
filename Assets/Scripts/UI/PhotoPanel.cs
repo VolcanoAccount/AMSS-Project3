@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class GameOverPanel : BasePanel
+public class PhotoPanel : BasePanel
 {
     Button returnBtn;
     Button downloadBtn;

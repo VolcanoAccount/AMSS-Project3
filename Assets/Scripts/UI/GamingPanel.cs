@@ -85,6 +85,6 @@ public class GamingPanel : BasePanel
         Texture2D texture = new Texture2D(1, 1);
         texture.LoadImage(photoByte);
         PlayerManager.Instance.SetPohto(texture);
-        UIManager.Instance.PushPanel(UIPanelType.GameOver);
+        UIManager.Instance.PushPanel(UIPanelType.Photo);
     }
 }

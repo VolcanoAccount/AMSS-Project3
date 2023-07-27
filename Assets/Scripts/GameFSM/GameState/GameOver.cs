@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class GameOver : StateBase
 {
-    public override void OnEnter()
-    {
-        UIManager.Instance.PushPanel(UIPanelType.GameOver);
-    }
+    public override void OnEnter() { }
 
-    public override void OnExit()
-    {
-        
-    }
+    public override void OnExit() { }
 
-    public override void OnUpdate()
-    {
-        
-    }
+    public override void OnUpdate() { }
 }
