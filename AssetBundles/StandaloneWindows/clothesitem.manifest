@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1627863015
+CRC: 3332889893
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a2411b770debd58a6d511b5f6fca0440
+    Hash: d5de1b2171126577bbfb508fc80f9779
   TypeTreeHash:
     serializedVersion: 2
     Hash: 414ced8165870a49b933ba536f6246d6
@@ -35,13 +35,30 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/Prefabs/ClothesItem/10005.prefab
 - Assets/Prefabs/ClothesItem/10004.prefab
-- Assets/Prefabs/ClothesItem/10006.prefab
+- Assets/Prefabs/ClothesItem/10025.prefab
 - Assets/Prefabs/ClothesItem/10003.prefab
+- Assets/Prefabs/ClothesItem/10017.prefab
+- Assets/Prefabs/ClothesItem/10006.prefab
+- Assets/Prefabs/ClothesItem/10020.prefab
+- Assets/Prefabs/ClothesItem/10019.prefab
 - Assets/Prefabs/ClothesItem/10001.prefab
+- Assets/Prefabs/ClothesItem/10013.prefab
 - Assets/Prefabs/ClothesItem/10011.prefab
 - Assets/Prefabs/ClothesItem/10002.prefab
+- Assets/Prefabs/ClothesItem/10023.prefab
+- Assets/Prefabs/ClothesItem/10018.prefab
+- Assets/Prefabs/ClothesItem/10016.prefab
+- Assets/Prefabs/ClothesItem/10026.prefab
 - Assets/Prefabs/ClothesItem/10007.prefab
+- Assets/Prefabs/ClothesItem/10022.prefab
+- Assets/Prefabs/ClothesItem/10024.prefab
+- Assets/Prefabs/ClothesItem/10014.prefab
+- Assets/Prefabs/ClothesItem/10028.prefab
 - Assets/Prefabs/ClothesItem/10010.prefab
+- Assets/Prefabs/ClothesItem/10012.prefab
 - Assets/Prefabs/ClothesItem/10008.prefab
+- Assets/Prefabs/ClothesItem/10021.prefab
 - Assets/Prefabs/ClothesItem/10009.prefab
+- Assets/Prefabs/ClothesItem/10027.prefab
+- Assets/Prefabs/ClothesItem/10015.prefab
 Dependencies: []

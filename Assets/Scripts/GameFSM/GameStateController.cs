@@ -9,8 +9,7 @@ public enum GameState
     None,
     GameGuid,
     GamePrepare,
-    Gaming,
-    GameOver
+    Gaming
 }
 
 
