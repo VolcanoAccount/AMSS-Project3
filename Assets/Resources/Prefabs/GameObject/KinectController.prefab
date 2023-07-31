@@ -60,7 +60,7 @@ MonoBehaviour:
   displaySkeletonLines: 0
   DisplayMapsWidthPercent: 20
   useMultiSourceReader: 0
-  minUserDistance: 0.5
+  minUserDistance: 1
   maxUserDistance: 0
   maxLeftRightDistance: 0
   maxTrackedUsers: 6

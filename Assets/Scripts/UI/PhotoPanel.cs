@@ -18,6 +18,8 @@ public class PhotoPanel : BasePanel
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1;
 
+        InitButton();
+
         if (photo == null)
         {
             photo = transform.Find("PhotoFrame/Photo").GetComponent<RawImage>();
@@ -34,8 +36,6 @@ public class PhotoPanel : BasePanel
     {
         qrCode = transform.Find("PhotoFrame/QrCode").GetComponent<RawImage>();
         qrCode.gameObject.SetActive(false);
-        returnBtn = transform.Find("ReturnBtn").GetComponent<Button>();
-        returnBtn.onClick.AddListener(OnClickReturnBtn);
 
         downloadBtn.onClick.AddListener(OnClickDownloadBtn);
     }
@@ -92,5 +92,26 @@ public class PhotoPanel : BasePanel
                 Debug.Log("下载出错" + request.responseCode + "," + request.error);
             }
         }
+    }
+
+    void InitButton()
+    {
+        if (returnBtn != null)
+        {
+            Destroy(returnBtn.gameObject);
+        }
+        if (PlayerManager.Instance.sex == Sex.Male)
+        {
+            returnBtn = GameObject
+                .Instantiate(Resources.Load<GameObject>("Prefabs/UI/MaleReturnBtn"), transform)
+                .GetComponent<Button>();
+        }
+        else
+        {
+            returnBtn = GameObject
+                .Instantiate(Resources.Load<GameObject>("Prefabs/UI/FemaleReturnBtn"), transform)
+                .GetComponent<Button>();
+        }
+        returnBtn.onClick.AddListener(OnClickReturnBtn);
     }
 }

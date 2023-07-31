@@ -9,9 +9,9 @@ public enum GameState
     None,
     GameGuid,
     GamePrepare,
-    Gaming
+    Gaming,
+    GameOver
 }
-
 
 /// <summary>
 /// 游戏状态机控制器
@@ -30,13 +30,10 @@ public class GameStateController
             return instance;
         }
     }
+
     //当前状态
-    private GameState currentState;
-    public GameState CurrentState
-    {
-        get { return currentState; }
-        set { currentState = value; }
-    }
+    public GameState currentState { get; private set; }
+    public GameState preState { get; private set; }
 
     //当前状态对象
     StateBase CurrentObj;
@@ -44,40 +41,43 @@ public class GameStateController
     //存放全部状态对象-对象池
     Dictionary<GameState, StateBase> stateDic = new Dictionary<GameState, StateBase>();
 
-    void Start()
-    {
-        ChangeState<GameGuid>(GameState.GameGuid);
-    }
-
     public void OnUpdate()
     {
-        if (CurrentObj != null) CurrentObj.OnUpdate();
+        if (CurrentObj != null)
+            CurrentObj.OnUpdate();
     }
 
     /// <summary>
     /// 修改状态
     /// </summary>
-    public void ChangeState<K>(GameState newState, bool reCurrState = false) where K : StateBase, new()
+    public void ChangeState<K>(GameState newState, bool reCurrState = false)
+        where K : StateBase, new()
     {
         //如果新状态和当前状态一致，不需要刷新状态
-        if (newState.Equals(CurrentState) && !reCurrState) return;
+        if (newState.Equals(currentState) && !reCurrState)
+            return;
 
         //如果当前状态对象存在，应该执行其退出
-        if (CurrentObj != null) CurrentObj.OnExit();
-        CurrentState = newState;
+        if (CurrentObj != null)
+            CurrentObj.OnExit();
+        preState = currentState;
+        currentState = newState;
         //基于新状态 获得一个新的状态对象
         CurrentObj = GetStateObj<K>(newState);
         CurrentObj.OnEnter();
-        Debug.Log("GameState："+currentState);
+        Debug.Log("当前游戏状态：" + currentState);
+        Debug.Log("先前游戏状态：" + preState);
     }
 
     /// <summary>
     /// 获取状态对象
     /// </summary>
-    private StateBase GetStateObj<K>(GameState stateType) where K : StateBase, new()
+    private StateBase GetStateObj<K>(GameState stateType)
+        where K : StateBase, new()
     {
         //查看字典有没有该状态
-        if (stateDic.ContainsKey(stateType)) return stateDic[stateType];
+        if (stateDic.ContainsKey(stateType))
+            return stateDic[stateType];
 
         //字典没有该状态，实例化一个并返回
         StateBase state = new K();

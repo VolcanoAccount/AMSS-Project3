@@ -9,7 +9,7 @@ public class ClothesOptionsPanel : BasePanel
 {
     public int clothIdex = 0;
 
-
+    GameObject btns;
     Image clothesImage;
     Button confirmBtn;
     Button forwardBtn;
@@ -18,7 +18,6 @@ public class ClothesOptionsPanel : BasePanel
 
     ClothesInfoJson clothesInfoJson;
     List<Clothes> clothesList = new List<Clothes>();
-
 
     #region 面板周期函数
     public override void OnEnter()
@@ -36,24 +35,19 @@ public class ClothesOptionsPanel : BasePanel
         }
         if (clothesImage == null)
         {
-            clothesImage=transform.Find("Clothes").GetComponent<Image>();
+            clothesImage = transform.Find("Clothes").GetComponent<Image>();
         }
 
         InitClothList();
         GenerationClothing(clothIdex);
+        InitButton();
     }
 
     void Start()
     {
-        confirmBtn = transform.Find("ConfirmBtn").GetComponent<Button>();
-        forwardBtn = transform.Find("ForwardBtn").GetComponent<Button>();
-        backwardBtn = transform.Find("BackwardBtn").GetComponent<Button>();
-        returnBtn = transform.Find("ReturnBtn").GetComponent<Button>();
-        confirmBtn.onClick.AddListener(OnClickConfirmBtn);
-        returnBtn.onClick.AddListener(OnClickReturnBtn);
-        forwardBtn.onClick.AddListener(() => { SwitchClothes(1); });
-        backwardBtn.onClick.AddListener(() => { SwitchClothes(0); });
+        // GameStateController.Instance.ChangeState<GameGuid>(GameState.GameGuid);
     }
+
     void Update()
     {
         if (PlayerGestureListener.Instance.IsSwipeRight())
@@ -70,11 +64,13 @@ public class ClothesOptionsPanel : BasePanel
     {
         canvasGroup.blocksRaycasts = false;
     }
+
     public override void OnResume()
     {
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1;
     }
+
     public override void OnExit()
     {
         canvasGroup.blocksRaycasts = false;
@@ -107,9 +103,13 @@ public class ClothesOptionsPanel : BasePanel
         }
         Debug.Log("添加服装后链表的大小：" + clothesList.Count);
     }
+
     public void GenerationClothing(int index)
     {
-        clothesImage.sprite=AssetBundleManager.Instance.LoadAsset<Sprite>("cloth", clothesList[index].assetName.ToString());
+        clothesImage.sprite = AssetBundleManager.Instance.LoadAsset<Sprite>(
+            "cloth",
+            clothesList[index].assetName.ToString()
+        );
         Debug.Log("当前服装是：" + clothesList[index].name);
     }
 
@@ -145,7 +145,49 @@ public class ClothesOptionsPanel : BasePanel
     {
         UIManager.Instance.PopPanel();
     }
+
+    void InitButton()
+    {
+        if (btns != null)
+        {
+            Destroy(btns);
+        }
+        if (PlayerManager.Instance.sex == Sex.Male)
+        {
+            btns = GameObject.Instantiate(
+                Resources.Load<GameObject>("Prefabs/UI/OptionsMaleButton"),
+                transform
+            );
+            returnBtn = GameObject
+                .Instantiate(Resources.Load<GameObject>("Prefabs/UI/MaleReturnBtn"), transform)
+                .GetComponent<Button>();
+        }
+        else
+        {
+            btns = GameObject.Instantiate(
+                Resources.Load<GameObject>("Prefabs/UI/OptionsFemaleButton"),
+                transform
+            );
+            returnBtn = GameObject
+                .Instantiate(Resources.Load<GameObject>("Prefabs/UI/FemaleReturnBtn"), transform)
+                .GetComponent<Button>();
+        }
+        confirmBtn = btns.transform.Find("ConfirmBtn").GetComponent<Button>();
+        forwardBtn = btns.transform.Find("ForwardBtn").GetComponent<Button>();
+        backwardBtn = btns.transform.Find("BackwardBtn").GetComponent<Button>();
+        confirmBtn.onClick.AddListener(OnClickConfirmBtn);
+        returnBtn.onClick.AddListener(OnClickReturnBtn);
+        forwardBtn.onClick.AddListener(() =>
+        {
+            SwitchClothes(1);
+        });
+        backwardBtn.onClick.AddListener(() =>
+        {
+            SwitchClothes(0);
+        });
+    }
 }
+
 public class Clothes
 {
     public string name;

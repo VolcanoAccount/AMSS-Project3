@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class SexSelectionPanel : BasePanel
 {
@@ -10,9 +12,9 @@ public class SexSelectionPanel : BasePanel
 
     void Start()
     {
-        maleBtn=transform.Find("MaleBtn").GetComponent<Button>();
+        maleBtn = transform.Find("MaleBtn").GetComponent<Button>();
         maleBtn.onClick.AddListener(OnClickMaleBtn);
-        femaleBtn=transform.Find("FemaleBtn").GetComponent<Button>();
+        femaleBtn = transform.Find("FemaleBtn").GetComponent<Button>();
         femaleBtn.onClick.AddListener(OnClickFemaleBtn);
     }
 
@@ -27,10 +29,13 @@ public class SexSelectionPanel : BasePanel
     {
         canvasGroup.blocksRaycasts = false;
     }
+
     public override void OnResume()
     {
         canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1;
     }
+
     public override void OnExit()
     {
         canvasGroup.blocksRaycasts = false;
@@ -42,6 +47,7 @@ public class SexSelectionPanel : BasePanel
         PlayerManager.Instance.SetSex(Sex.Male);
         UIManager.Instance.PushPanel(UIPanelType.ClothesOptions);
     }
+
     void OnClickFemaleBtn()
     {
         PlayerManager.Instance.SetSex(Sex.Female);

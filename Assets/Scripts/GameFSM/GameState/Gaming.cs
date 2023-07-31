@@ -6,16 +6,30 @@ public class Gaming : StateBase
 {
     public override void OnEnter()
     {
-        UIManager.Instance.PushPanel(UIPanelType.SexSelection);
+        switch (UIManager.Instance.GetPanelType(UIManager.Instance.PanelStack.Peek()))
+        {
+            case UIPanelType.GamePrepare:
+                UIManager.Instance.PushPanel(UIPanelType.SexSelection);
+                break;
+            case UIPanelType.SexSelection:
+            case UIPanelType.ClothesOptions:
+            case UIPanelType.Gaming:
+            default:
+                break;
+        }
     }
 
-    public override void OnExit()
-    {
-        
-    }
+    public override void OnExit() { }
 
     public override void OnUpdate()
     {
-        
+        if (!KinectManager.Instance.IsUserDetected())
+        {
+            gameManager.StartTimer();
+        }
+        else
+        {
+            gameManager.StopTimer();
+        }
     }
 }

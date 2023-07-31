@@ -1,8 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AMSS;
+using System.Linq;
 
 public class UIManager
 {
@@ -19,9 +19,13 @@ public class UIManager
         }
     }
 
-    private Dictionary<UIPanelType, string> panelPathDict = new Dictionary<UIPanelType, string>();//存储所有面板的路径
-    private Dictionary<UIPanelType, BasePanel> panelDict = new Dictionary<UIPanelType, BasePanel>();//存储已经实例化的面板
-    private Stack<BasePanel> panelStack = new Stack<BasePanel>();//存储要操作的界面
+    private Dictionary<UIPanelType, string> panelPathDict = new Dictionary<UIPanelType, string>(); //存储所有面板的路径
+    private Dictionary<UIPanelType, BasePanel> panelDict = new Dictionary<UIPanelType, BasePanel>(); //存储已经实例化的面板
+    private Stack<BasePanel> panelStack = new Stack<BasePanel>(); //存储要操作的界面
+    public Stack<BasePanel> PanelStack
+    {
+        get { return panelStack; }
+    }
 
     private Transform sceneCanvasTF;
     public Transform SceneCanvasTF
@@ -30,9 +34,11 @@ public class UIManager
         {
             if (sceneCanvasTF == null)
             {
-                sceneCanvasTF = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/UI/SceneCanvas")).transform;
-                sceneCanvasTF.GetComponent<Canvas>().renderMode=RenderMode.ScreenSpaceCamera;
-                sceneCanvasTF.GetComponent<Canvas>().worldCamera=Camera.main;
+                sceneCanvasTF = GameObject
+                    .Instantiate(Resources.Load<GameObject>("Prefabs/UI/SceneCanvas"))
+                    .transform;
+                sceneCanvasTF.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+                sceneCanvasTF.GetComponent<Canvas>().worldCamera = Camera.main;
             }
             return sceneCanvasTF;
         }
@@ -54,10 +60,10 @@ public class UIManager
     }
 
     //实例化面板
-    private BasePanel GetPanel(UIPanelType uIPanelType)
+    public BasePanel GetPanel(UIPanelType uIPanelType)
     {
         BasePanel basePanel;
-        panelDict.TryGetValue(uIPanelType, out basePanel);//根据Panel类型获取对应的面板
+        panelDict.TryGetValue(uIPanelType, out basePanel); //根据Panel类型获取对应的面板
         if (basePanel == null)
         {
             string path;
@@ -91,16 +97,17 @@ public class UIManager
     /// <param name="instPanel"></param>
     void AddScriptsComponent(UIPanelType uIPanelType, GameObject instPanel)
     {
-        string str = System.Enum.GetName(typeof(UIPanelType), uIPanelType);//枚举转字符串
-        string scriptsName = str + "Panel";//获取脚本名字
-        Type scripts = Type.GetType(scriptsName);//反射获取对应类型
+        string str = System.Enum.GetName(typeof(UIPanelType), uIPanelType); //枚举转字符串
+        string scriptsName = str + "Panel"; //获取脚本名字
+        Type scripts = Type.GetType(scriptsName); //反射获取对应类型
         if (!instPanel.GetComponent(scripts))
         {
             instPanel.AddComponent(scripts);
         }
     }
 
-    public T GetAndAddComponent<T>(GameObject instPanel) where T : Component
+    public T GetAndAddComponent<T>(GameObject instPanel)
+        where T : Component
     {
         if (!instPanel.GetComponent<T>())
         {
@@ -117,7 +124,7 @@ public class UIManager
     {
         if (panelStack.Count > 0)
         {
-            panelStack.Peek().OnPause();
+            panelStack.Peek().OnExit();
         }
         BasePanel panel = GetPanel(uIPanelType);
         panelStack.Push(panel);
@@ -143,12 +150,19 @@ public class UIManager
         panelStack.Peek().OnResume();
     }
 
-    /// <summary>
-    /// Panel层级置顶
-    /// </summary>
-    /// <param name="tf"></param>
-    public void SetPanelAsFirstSibling(Transform tf)
+    public UIPanelType GetPanelType(BasePanel panel)
     {
-        tf.SetAsFirstSibling();
+        return panelDict.FirstOrDefault(x => x.Value.Equals(panel)).Key;
+    }
+
+    public bool ClearAllPanel()
+    {
+        foreach (var item in PanelStack)
+        {
+            UnityEngine.Object.Destroy(item.gameObject);
+        }
+        PanelStack.Clear();
+        panelDict.Clear();
+        return true;
     }
 }

@@ -14,16 +14,17 @@ public class GamePrepare : StateBase
         UIManager.Instance.PushPanel(UIPanelType.GamePrepare);
     }
 
-    public override void OnExit()
-    {
-
-    }
+    public override void OnExit() { }
 
     public override void OnUpdate()
     {
-        if(KinectManager.Instance.IsUserDetected())
+        if (!KinectManager.Instance.IsUserDetected())
         {
-            gameController.ChangeState<Gaming>(GameState.Gaming);
+            gameManager.StartTimer();
+        }
+        else
+        {
+            gameManager.StopTimer();
         }
     }
 }

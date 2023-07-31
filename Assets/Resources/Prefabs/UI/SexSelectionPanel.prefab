@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 8648103940275638259}
   - component: {fileID: 7179085790578493152}
   - component: {fileID: 3369859333611717001}
+  - component: {fileID: 5666595109127775592}
   m_Layer: 5
   m_Name: MaleBtn
   m_TagString: Untagged
@@ -104,7 +105,7 @@ RectTransform:
   m_GameObject: {fileID: 3065782665208743168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6549075926263678279}
@@ -198,6 +199,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5666595109127775592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3065782665208743168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3deab92e1d310b42a9905dde0b52b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button2: {fileID: 0}
+  hoverScaleAmount: 1.25
+  hoverDuration: 0.2
 --- !u!1 &4674316942360745923
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +457,7 @@ GameObject:
   - component: {fileID: 8220548147822625775}
   - component: {fileID: 8220548147822625774}
   - component: {fileID: 8220548147822625773}
+  - component: {fileID: 7702306246473697948}
   m_Layer: 5
   m_Name: FemaleBtn
   m_TagString: Untagged
@@ -457,7 +474,7 @@ RectTransform:
   m_GameObject: {fileID: 8220548147822625763}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6524498919347838915}
@@ -551,3 +568,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7702306246473697948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8220548147822625763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3deab92e1d310b42a9905dde0b52b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button2: {fileID: 0}
+  hoverScaleAmount: 1.25
+  hoverDuration: 0.2

@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class GameGuid : StateBase
 {
     GameObject GuidVideoGO;
+    VideoPlayer videoPlayer;
+
     public override void OnEnter()
     {
-        if(GuidVideoGO==null)
+        if (GuidVideoGO == null)
         {
-            GuidVideoGO=GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GameObject/GuidVideo"));
+            GuidVideoGO = GameObject.Instantiate(
+                Resources.Load<GameObject>("Prefabs/GameObject/GuidVideo")
+            );
+
+            videoPlayer = GuidVideoGO.transform
+                .Find("Canvas/GuidPanel")
+                .GetComponent<VideoPlayer>();
         }
+        GuidVideoGO.SetActive(true);
     }
 
     public override void OnExit()
@@ -20,9 +30,27 @@ public class GameGuid : StateBase
 
     public override void OnUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        //动画播放完毕
+        if (!videoPlayer.isPlaying && videoPlayer.time > 0f)
         {
-            gameController.ChangeState<GamePrepare>(GameState.GamePrepare);
+            if (gameManager.isGaming)
+            {
+                gameController.ChangeState<Gaming>(GameState.Gaming);
+            }
+            else
+            {
+                gameController.ChangeState<GamePrepare>(GameState.GamePrepare);
+            }
+        }
+        else
+        {
+            if (!gameManager.isGaming)
+            {
+                if (KinectManager.Instance.IsUserDetected())
+                {
+                    gameController.ChangeState<GamePrepare>(GameState.GamePrepare);
+                }
+            }
         }
     }
 }
