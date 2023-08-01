@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 4243277556
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: cloth
+      Dependencies: {}
+    Info_1:
+      Name: clothesitem
+      Dependencies: {}

@@ -89,7 +89,6 @@ public class GamingPanel : BasePanel
 
     void OnClickPhotoBtn()
     {
-        //TODO:拍照画面清理
         returnBtn.gameObject.SetActive(false);
         PohtoShooter.CountdownAndMakePhoto(countdown, this, Camera.main, OnPhotoTakenCallback);
     }
@@ -106,6 +105,7 @@ public class GamingPanel : BasePanel
         UIManager.Instance.PushPanel(UIPanelType.Photo);
         returnBtn.gameObject.SetActive(true);
         photoBtn.gameObject.SetActive(true);
+        InteractionManager.Instance.guiHandCursor.gameObject.SetActive(true);
     }
 
     void InitButton()

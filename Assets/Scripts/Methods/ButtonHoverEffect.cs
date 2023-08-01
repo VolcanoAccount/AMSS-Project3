@@ -3,32 +3,59 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class ButtonHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ButtonHoverEffect : MonoBehaviour
 {
-    public Button button2;
+    public Image targetImage;
+    public Image CursorImage;
+    bool isHovering;
     public float hoverScaleAmount = 1.25f;
     public float hoverDuration = 0.2f;
-
     private Vector3 originalScale;
 
     private void Start()
     {
-        if (button2 == null)
-            button2 = GetComponent<Button>();
+        if (targetImage == null)
+            targetImage = GetComponent<Image>();
 
-        // 记录按钮2的初始缩放
-        originalScale = button2.transform.localScale;
+        originalScale = targetImage.transform.localScale;
+        CursorImage = GameObject.FindWithTag("KinectCursor").GetComponent<Image>();
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    void Update()
     {
-        // 鼠标悬停时按钮2放大效果
-        button2.transform.DOScale(originalScale * hoverScaleAmount, hoverDuration).SetEase(Ease.OutQuad);
+        Vector2 screenPoint;
+        screenPoint = RectTransformUtility.WorldToScreenPoint(
+            Camera.main,
+            CursorImage.transform.position
+        );
+        isHovering = RectTransformUtility.RectangleContainsScreenPoint(
+            targetImage.GetComponent<RectTransform>(),
+            screenPoint,
+            Camera.main
+        );
+        OnPointerEnter();
+        OnPointerExit();
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    #region KinectCursor鼠标悬停监听
+    public void OnPointerEnter()
     {
-        // 鼠标移出时按钮2恢复正常大小
-        button2.transform.DOScale(originalScale, hoverDuration).SetEase(Ease.OutQuad);
+        if (isHovering)
+        {
+            // 鼠标悬停时按钮2放大效果
+            targetImage.transform
+                .DOScale(originalScale * hoverScaleAmount, hoverDuration)
+                .SetEase(Ease.OutQuad);
+        }
     }
+
+    public void OnPointerExit()
+    {
+        if (!isHovering)
+        {
+            // 鼠标移出时按钮2恢复正常大小
+            targetImage.transform.DOScale(originalScale, hoverDuration).SetEase(Ease.OutQuad);
+        }
+    }
+    #endregion
 }

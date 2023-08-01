@@ -119,7 +119,7 @@ MonoBehaviour:
   handOverlayCursor: 0
   smoothFactor: 10
   allowHandClicks: 1
-  allowPushToClick: 1
+  allowPushToClick: 0
   controlMouseCursor: 0
   controlMouseDrag: 0
   interactionListeners: []

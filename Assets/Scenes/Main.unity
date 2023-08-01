@@ -265,7 +265,7 @@ MonoBehaviour:
   kinectCanvasPrefab: {fileID: 687128875536988938, guid: 867865c3c81d9644483f41d0935b9667, type: 3}
   kinectCanvasTF: {fileID: 0}
   currentTime: 0
-  isPlayGameGuid: 1
+  isGaming: 0
 --- !u!82 &1200280075
 AudioSource:
   m_ObjectHideFlags: 0

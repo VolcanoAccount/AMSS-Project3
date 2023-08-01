@@ -46,6 +46,7 @@ namespace AMSS
                 }
             }
             countdown[0].parent.gameObject.SetActive(false);
+            InteractionManager.Instance.guiHandCursor.gameObject.SetActive(false);
             byte[] photoByte = MakePhoto(monoBehaviour, backroundCamera);
             callback?.Invoke(photoByte);
             yield return null;

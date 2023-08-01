@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 687128873988754369}
   m_Layer: 5
   m_Name: GUICursor
-  m_TagString: Untagged
+  m_TagString: KinectCursor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

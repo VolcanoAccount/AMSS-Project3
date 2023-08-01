@@ -68,6 +68,8 @@ namespace AMSS
             kinectCanvasTF = GameObject
                 .Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/UI/KinectCanvas"))
                 .transform;
+            kinectCanvasTF.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+            kinectCanvasTF.GetComponent<Canvas>().worldCamera = Camera.main;
             InteractionManager.Instance.guiHandCursor = kinectCanvasTF
                 .Find("GUICursor")
                 .GetComponent<Image>();
