@@ -10,15 +10,14 @@ namespace AMSS
     {
         public static GameManager instance { get; private set; }
 
-        public GameStateController gameController;
+        public GameStateController gameController { get; private set; }
 
-        public GameObject kinectControllerGO;
-        public GameObject kinectCanvasPrefab;
-        public Transform kinectCanvasTF;
+        public GameObject kinectControllerGO { get; private set; }
+        Transform kinectCanvasTF;
 
         public bool isInitKinect { get; private set; }
 
-        float totalTime = 60f;
+        float totalTime = 600f;
 
         [SerializeField, Header("无玩家操作时长")]
         private float currentTime = 0;

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GamingPanel : BasePanel
 {
+    // string bundleURL = "http://120.25.202.75:8083/StandaloneWindows/clothesitem";
     SetFaceTexture setFaceTexture;
     Button returnBtn;
     Button photoBtn;
@@ -19,6 +20,17 @@ public class GamingPanel : BasePanel
         base.OnEnter();
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1;
+
+        // if(!AssetBundleManager.Instance.LoadedAssetBundles.ContainsKey("clothesitem"))
+        // {
+        //     Debug.Log("clothesitem资源包未加载，现在加载该资源包！");
+        //     StartCoroutine(LoadAssetBundleAndAsset());
+        // }
+        // else
+        // {
+        //     GenerationClothing();
+        // }
+
         AssetBundleManager.Instance.LoadAssetBundle("clothesitem");
 
         InitButton();
@@ -63,6 +75,12 @@ public class GamingPanel : BasePanel
     }
     #endregion
 
+    // private IEnumerator LoadAssetBundleAndAsset()
+    // {
+    //     yield return AssetBundleManager.Instance.LoadAssetBundleFromServer(bundleURL, "clothesitem");
+    //     GenerationClothing();
+    // }
+
     void GenerationClothing()
     {
         Clothes clothes = PlayerManager.Instance.chooseClothes;
@@ -90,6 +108,7 @@ public class GamingPanel : BasePanel
     void OnClickPhotoBtn()
     {
         returnBtn.gameObject.SetActive(false);
+        photoBtn.interactable = false;
         PohtoShooter.CountdownAndMakePhoto(countdown, this, Camera.main, OnPhotoTakenCallback);
     }
 
@@ -106,6 +125,7 @@ public class GamingPanel : BasePanel
         returnBtn.gameObject.SetActive(true);
         photoBtn.gameObject.SetActive(true);
         InteractionManager.Instance.guiHandCursor.gameObject.SetActive(true);
+        photoBtn.interactable = true;
     }
 
     void InitButton()
