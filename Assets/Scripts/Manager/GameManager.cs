@@ -1,23 +1,26 @@
-﻿using System.Net.Mime;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace AMSS
 {
+    /// <summary>
+    /// 游戏管理类
+    /// 启动ui框架和游戏有限状态机框架
+    /// </summary>
     public class GameManager : MonoBehaviour
     {
-        public static GameManager instance { get; private set; }
+        public static GameManager Instance { get; private set; }
 
-        public GameStateController gameController { get; private set; }
+        public GameStateController GameController { get; private set; }
+
+        public UIManager UIManager { get; private set; }
 
         public GameObject kinectControllerGO { get; private set; }
         Transform kinectCanvasTF;
 
         public bool isInitKinect { get; private set; }
 
-        float totalTime = 600f;
+        float totalTime = 60f;
 
         [SerializeField, Header("无玩家操作时长")]
         private float currentTime = 0;
@@ -27,31 +30,36 @@ namespace AMSS
 
         private void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = this;
+                Instance = this;
             }
 
-            if (gameController == null)
+            if (GameController == null)
             {
-                gameController = GameStateController.Instance;
+                GameController = GameStateController.Instance;
+            }
+
+            if (UIManager == null)
+            {
+                UIManager = UIManager.Instance;
             }
         }
 
         void Start()
         {
-            gameController.ChangeState<GamePrepare>(GameState.GamePrepare);
+            GameController.ChangeState<GamePrepare>(GameState.GamePrepare);
         }
 
         void Update()
         {
-            gameController.OnUpdate();
+            GameController.OnUpdate();
             if (isTimerRunning)
             {
                 currentTime += Time.deltaTime;
                 if (currentTime >= totalTime)
                 {
-                    gameController.ChangeState<GameOver>(GameState.GameOver);
+                    GameController.ChangeState<GameOver>(GameState.GameOver);
                     StopTimer();
                     isGaming = false;
                 }
@@ -92,6 +100,18 @@ namespace AMSS
         public bool GameOver()
         {
             return UIManager.Instance.ClearAllPanel();
+        }
+
+        //打开UIPanel
+        public void PushPanel(UIPanelType type)
+        {
+            UIManager.PushPanel(type);
+        }
+
+        //获取UI面板UIPanelType类型
+        public UIPanelType GetPanelType(BasePanel panel)
+        {
+            return UIManager.GetPanelType(panel);
         }
     }
 }

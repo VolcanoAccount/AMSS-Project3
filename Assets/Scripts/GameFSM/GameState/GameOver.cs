@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 游戏结束状态
+/// </summary>
 public class GameOver : StateBase
 {
+    #region 状态类周期函数
     public override void OnEnter()
     {
         if (gameManager.GameOver())
@@ -16,9 +20,8 @@ public class GameOver : StateBase
 
     public override void OnUpdate() { }
 
-    // Start is called before the first frame update
     void Start() { }
 
-    // Update is called once per frame
     void Update() { }
+    #endregion
 }

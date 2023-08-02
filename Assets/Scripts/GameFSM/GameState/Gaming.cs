@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 游戏中状态
+/// </summary>
 public class Gaming : StateBase
 {
+    #region 状态类周期函数
     public override void OnEnter()
     {
-        switch (UIManager.Instance.GetPanelType(UIManager.Instance.PanelStack.Peek()))
+        if (
+            gameManager.GetPanelType(gameManager.UIManager.PanelStack.Peek())
+            == UIPanelType.GamePrepare
+        )
         {
-            case UIPanelType.GamePrepare:
-                UIManager.Instance.PushPanel(UIPanelType.SexSelection);
-                break;
-            case UIPanelType.SexSelection:
-            case UIPanelType.ClothesOptions:
-            case UIPanelType.Gaming:
-            default:
-                break;
+            gameManager.PushPanel(UIPanelType.SexSelection);
         }
     }
 
@@ -32,4 +32,5 @@ public class Gaming : StateBase
             gameManager.StopTimer();
         }
     }
+    #endregion
 }

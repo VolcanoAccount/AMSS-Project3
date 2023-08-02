@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using AMSS;
 
-
 /// <summary>
 /// 状态基类
 /// 所有状态都继承这个基类
@@ -14,17 +13,23 @@ public abstract class StateBase
     public GameState StateType;
     protected GameStateController gameController;
     protected GameManager gameManager;
+
     //首次实例化时的初始化
     public void Init(GameStateController controller, GameState stateType)
     {
         this.StateType = stateType;
-        gameController=controller;
-        gameManager=GameManager.instance;
+        gameController = controller;
+        gameManager = GameManager.Instance;
     }
+
+    #region 状态类周期函数
     //进入
     public abstract void OnEnter();
+
     //更新
     public abstract void OnUpdate();
+
     //退出
     public abstract void OnExit();
+    #endregion
 }

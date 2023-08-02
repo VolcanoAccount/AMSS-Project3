@@ -45,7 +45,7 @@ public class GamePreparePanel : BasePanel
 
     void OnClickStartBtn()
     {
-        GameManager.instance.isGaming = true;
+        GameManager.Instance.isGaming = true;
         GameStateController.Instance.ChangeState<Gaming>(GameState.Gaming);
     }
 }

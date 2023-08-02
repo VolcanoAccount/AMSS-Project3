@@ -4,6 +4,10 @@ using UnityEngine;
 using AMSS;
 using System.Linq;
 
+
+/// <summary>
+/// UI管理类
+/// </summary>
 public class UIManager
 {
     private static UIManager instance;
@@ -27,6 +31,7 @@ public class UIManager
         get { return panelStack; }
     }
 
+    //UI画布
     private Transform sceneCanvasTF;
     public Transform SceneCanvasTF
     {
@@ -55,6 +60,7 @@ public class UIManager
         UIPanelTypeJosn jsonObject = JsonParser<UIPanelTypeJosn>.Parse("JsonInfo/UIPanelType");
         foreach (var item in jsonObject.infoList)
         {
+            //存储面板路径
             panelPathDict.Add(item.uIPanelType, item.path);
         }
     }
@@ -91,10 +97,10 @@ public class UIManager
     }
 
     /// <summary>
-    /// 给UIPanel添加脚本
+    /// 给UIPanel挂载脚本
     /// </summary>
-    /// <param name="uIPanelType"></param>
-    /// <param name="instPanel"></param>
+    /// <param name="uIPanelType">UIPanel类型枚举</param>
+    /// <param name="instPanel">需要挂载脚本的面板</param>
     void AddScriptsComponent(UIPanelType uIPanelType, GameObject instPanel)
     {
         string str = System.Enum.GetName(typeof(UIPanelType), uIPanelType); //枚举转字符串
@@ -106,8 +112,14 @@ public class UIManager
         }
     }
 
+    /// <summary>
+    /// 挂载脚本的泛型方法
+    /// </summary>
+    /// <param name="instPanel">需要挂载脚本的面板</param>
+    /// <typeparam name="T">面板脚本组件</typeparam>
+    /// <returns>返回脚本组件</returns>
     public T GetAndAddComponent<T>(GameObject instPanel)
-        where T : Component
+        where T : BasePanel
     {
         if (!instPanel.GetComponent<T>())
         {
@@ -150,11 +162,20 @@ public class UIManager
         panelStack.Peek().OnResume();
     }
 
+    /// <summary>
+    /// 根据面板脚本获取面板枚举类型
+    /// </summary>
+    /// <param name="panel">面板脚本</param>
+    /// <returns>返回面板枚举类型</returns>
     public UIPanelType GetPanelType(BasePanel panel)
     {
         return panelDict.FirstOrDefault(x => x.Value.Equals(panel)).Key;
     }
 
+    /// <summary>
+    /// 清空面板实例
+    /// </summary>
+    /// <returns>返回是否清空</returns>
     public bool ClearAllPanel()
     {
         foreach (var item in PanelStack)

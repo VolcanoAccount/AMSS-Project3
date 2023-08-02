@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// 存储UIPanelInfoJson数据的类
+/// </summary>
 [Serializable]
 public class UIPanelInfo:ISerializationCallbackReceiver
 {

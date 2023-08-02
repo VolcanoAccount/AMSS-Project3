@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 游戏状态枚举
+/// </summary>
 public enum GameState
 {
     //默认
@@ -14,7 +17,8 @@ public enum GameState
 }
 
 /// <summary>
-/// 游戏状态机控制器
+/// 游戏有限状态机控制器
+/// 控制游戏状态切换
 /// </summary>
 public class GameStateController
 {
@@ -33,6 +37,8 @@ public class GameStateController
 
     //当前状态
     public GameState currentState { get; private set; }
+
+    //先前状态
     public GameState preState { get; private set; }
 
     //当前状态对象
@@ -48,8 +54,11 @@ public class GameStateController
     }
 
     /// <summary>
-    /// 修改状态
+    /// 切换游戏状态
     /// </summary>
+    /// <param name="newState">新的游戏状态</param>
+    /// <param name="reCurrState">是否需要刷新状态</param>
+    /// <typeparam name="K">继承自StateBase的泛型状态类</typeparam>
     public void ChangeState<K>(GameState newState, bool reCurrState = false)
         where K : StateBase, new()
     {
@@ -72,6 +81,9 @@ public class GameStateController
     /// <summary>
     /// 获取状态对象
     /// </summary>
+    /// <param name="stateType">GameState状态枚举</param>
+    /// <typeparam name="K">继承自StateBase的泛型状态类</typeparam>
+    /// <returns>返回继承自StateBase的游戏状态对象</returns>
     private StateBase GetStateObj<K>(GameState stateType)
         where K : StateBase, new()
     {

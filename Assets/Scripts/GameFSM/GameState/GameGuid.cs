@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
+/// <summary>
+/// GameGuid游戏状态类，播放引导动画
+/// </summary>
 public class GameGuid : StateBase
 {
     GameObject GuidVideoGO;
     VideoPlayer videoPlayer;
 
+    #region 状态类周期函数
     public override void OnEnter()
     {
         if (GuidVideoGO == null)
@@ -30,7 +34,7 @@ public class GameGuid : StateBase
 
     public override void OnUpdate()
     {
-        //动画播放完毕
+        //判断播放完毕游戏状态切换到哪个状态
         if (!videoPlayer.isPlaying && videoPlayer.time > 0f)
         {
             if (gameManager.isGaming)
@@ -53,4 +57,5 @@ public class GameGuid : StateBase
             }
         }
     }
+    #endregion
 }
