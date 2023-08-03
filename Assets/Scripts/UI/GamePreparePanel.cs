@@ -9,21 +9,19 @@ public class GamePreparePanel : BasePanel
 {
     Button startBtn;
 
-    void Start()
-    {
-        startBtn = transform.Find("StartButton").GetComponent<Button>();
-        startBtn.onClick.AddListener(OnClickStartBtn);
-        startBtn.transform
-            .DOScale(1 * 1.2f, 1f)
-            .SetEase(Ease.OutQuad)
-            .SetLoops(-1, LoopType.Yoyo);
-    }
-
+    #region 面板周期函数
     public override void OnEnter()
     {
         base.OnEnter();
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
+    }
+
+    void Start()
+    {
+        startBtn = transform.Find("StartButton").GetComponent<Button>();
+        startBtn.onClick.AddListener(OnClickStartBtn);
+        startBtn.transform.DOScale(1 * 1.2f, 1f).SetEase(Ease.OutQuad).SetLoops(-1, LoopType.Yoyo);
     }
 
     public override void OnPause()
@@ -42,10 +40,11 @@ public class GamePreparePanel : BasePanel
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0;
     }
+    #endregion
 
     void OnClickStartBtn()
     {
-        GameManager.Instance.isGaming = true;
-        GameStateController.Instance.ChangeState<Gaming>(GameState.Gaming);
+        GameManager.isGaming = true;
+        GameManager.GameController.ChangeState<Gaming>(GameState.Gaming);
     }
 }

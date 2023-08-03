@@ -3,6 +3,10 @@ using System.IO;
 using UnityEngine.Networking;
 using System.Collections;
 
+
+/// <summary>
+/// 照片上传类
+/// </summary>
 public static class ImageUploader
 {
     // 在游戏中调用此方法来上传图片
@@ -19,7 +23,7 @@ public static class ImageUploader
     /// 图片上传到OSS
     /// </summary>
     /// <param name="serverURL"></param>
-    /// <param name="imageData"></param>
+    /// <param name="imageData">图片的二进制字节数组</param>
     /// <returns></returns>
     public static IEnumerator UploadImageToOSS(string serverURL, byte[] imageData)
     {

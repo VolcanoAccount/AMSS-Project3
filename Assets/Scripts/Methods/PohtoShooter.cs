@@ -1,16 +1,13 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace AMSS
 {
     public static class PohtoShooter
     {
         /// <summary>
-        /// /// Counts down (from 3 for instance), then takes a picture and opens it
+        /// 开启协程倒计时并拍照
         /// </summary>
         public static void CountdownAndMakePhoto(
             Transform[] countdown,
@@ -24,7 +21,7 @@ namespace AMSS
             );
         }
 
-        // counts down (from 3 for instance), then takes a picture and opens it
+        //倒计时协程
         static IEnumerator CoCountdownAndMakePhoto(
             MonoBehaviour monoBehaviour,
             Transform[] countdown,
@@ -72,13 +69,12 @@ namespace AMSS
                 backroundCamera.targetTexture = null;
             }
 
-            // get the screenshot
+            // 获取截屏
             RenderTexture prevActiveTex = RenderTexture.active;
             RenderTexture.active = rt;
 
             screenShot.ReadPixels(new Rect(0, 0, resWidth, resHeight), 0, 0);
 
-            // clean-up
             RenderTexture.active = prevActiveTex;
 
             byte[] btScreenShot = screenShot.EncodeToPNG();

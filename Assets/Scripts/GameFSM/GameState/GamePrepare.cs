@@ -12,12 +12,12 @@ public class GamePrepare : StateBase
     public override void OnEnter()
     {
         //初始化Kinect
-        if (gameManager.kinectControllerGO == null)
+        if (GameManager.kinectControllerGO == null)
         {
-            gameManager.InitKinect();
+            GameManager.InitKinect();
         }
 
-        gameManager.PushPanel(UIPanelType.GamePrepare);
+        GameManager.PushPanel(UIPanelType.GamePrepare);
     }
 
     public override void OnExit() { }
@@ -26,11 +26,11 @@ public class GamePrepare : StateBase
     {
         if (!KinectManager.Instance.IsUserDetected())
         {
-            gameManager.StartTimer();
+            GameManager.StartTimer();
         }
         else
         {
-            gameManager.StopTimer();
+            GameManager.StopTimer();
         }
     }
     #endregion

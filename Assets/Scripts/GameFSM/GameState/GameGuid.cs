@@ -37,7 +37,7 @@ public class GameGuid : StateBase
         //判断播放完毕游戏状态切换到哪个状态
         if (!videoPlayer.isPlaying && videoPlayer.time > 0f)
         {
-            if (gameManager.isGaming)
+            if (GameManager.isGaming)
             {
                 gameController.ChangeState<Gaming>(GameState.Gaming);
             }
@@ -48,7 +48,7 @@ public class GameGuid : StateBase
         }
         else
         {
-            if (!gameManager.isGaming)
+            if (!GameManager.isGaming)
             {
                 if (KinectManager.Instance.IsUserDetected())
                 {

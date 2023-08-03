@@ -4,7 +4,6 @@ using UnityEngine;
 using AMSS;
 using System.Linq;
 
-
 /// <summary>
 /// UI管理类
 /// </summary>
@@ -132,7 +131,8 @@ public class UIManager
     /// 打开UIPanel
     /// </summary>
     /// <param name="uIPanelType">panel枚举类型</param>
-    public void PushPanel(UIPanelType uIPanelType)
+    /// /// <returns>返回面板实例脚本</returns>
+    public BasePanel PushPanel(UIPanelType uIPanelType)
     {
         if (panelStack.Count > 0)
         {
@@ -142,6 +142,7 @@ public class UIManager
         panelStack.Push(panel);
         panel.OnEnter();
         Debug.Log("UI面板栈中数据长度" + panelStack.Count);
+        return panel;
     }
 
     /// <summary>

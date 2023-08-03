@@ -15,6 +15,8 @@ namespace AMSS
 
         public UIManager UIManager { get; private set; }
 
+        public PlayerManager PlayerManager { get; private set; }
+
         public GameObject kinectControllerGO { get; private set; }
         Transform kinectCanvasTF;
 
@@ -43,6 +45,11 @@ namespace AMSS
             if (UIManager == null)
             {
                 UIManager = UIManager.Instance;
+            }
+
+            if (PlayerManager == null)
+            {
+                PlayerManager = PlayerManager.Instance;
             }
         }
 
@@ -99,19 +106,25 @@ namespace AMSS
 
         public bool GameOver()
         {
-            return UIManager.Instance.ClearAllPanel();
+            return UIManager.ClearAllPanel();
         }
 
         //打开UIPanel
-        public void PushPanel(UIPanelType type)
+        public BasePanel PushPanel(UIPanelType type)
         {
-            UIManager.PushPanel(type);
+            return UIManager.PushPanel(type);
         }
 
         //获取UI面板UIPanelType类型
         public UIPanelType GetPanelType(BasePanel panel)
         {
             return UIManager.GetPanelType(panel);
+        }
+
+        //关闭UI面板
+        public void PopPanel()
+        {
+            UIManager.PopPanel();
         }
     }
 }

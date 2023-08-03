@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
+/// <summary>
+/// KinectCursorUI悬停效果
+/// </summary>
 public class ButtonHoverEffect : MonoBehaviour
 {
     public Image targetImage;

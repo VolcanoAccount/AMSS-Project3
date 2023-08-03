@@ -92,7 +92,7 @@ public class ClothesOptionsPanel : BasePanel
         Debug.Log("添加服装前链表的大小：" + clothesList.Count);
         foreach (var item in clothesInfoJson.ClothesInfoList)
         {
-            if (item.Sex == (int)PlayerManager.Instance.sex)
+            if (item.Sex == (int)GameManager.PlayerManager.sex)
             {
                 Clothes clothes = new Clothes();
                 clothes.sex = item.Sex;
@@ -137,13 +137,13 @@ public class ClothesOptionsPanel : BasePanel
 
     void OnClickConfirmBtn()
     {
-        PlayerManager.Instance.SetCloth(clothesList[clothIdex]);
-        UIManager.Instance.PushPanel(UIPanelType.Gaming);
+        GameManager.PlayerManager.SetCloth(clothesList[clothIdex]);
+        GameManager.PushPanel(UIPanelType.Gaming);
     }
 
     void OnClickReturnBtn()
     {
-        UIManager.Instance.PopPanel();
+        GameManager.PopPanel();
     }
 
     void InitButton()
@@ -152,7 +152,7 @@ public class ClothesOptionsPanel : BasePanel
         {
             Destroy(btns);
         }
-        if (PlayerManager.Instance.sex == Sex.Male)
+        if (GameManager.PlayerManager.sex == Sex.Male)
         {
             btns = GameObject.Instantiate(
                 Resources.Load<GameObject>("Prefabs/UI/OptionsMaleButton"),

@@ -102,7 +102,7 @@ public class GamingPanel : BasePanel
 
     void OnClickReturnBtn()
     {
-        UIManager.Instance.PopPanel();
+        GameManager.PopPanel();
     }
 
     void OnClickPhotoBtn()
@@ -120,8 +120,8 @@ public class GamingPanel : BasePanel
     {
         Texture2D texture = new Texture2D(1, 1);
         texture.LoadImage(photoByte);
-        PlayerManager.Instance.SetPohto(texture);
-        UIManager.Instance.PushPanel(UIPanelType.Photo);
+        GameManager.PlayerManager.SetPohto(texture);
+        GameManager.PushPanel(UIPanelType.Photo);
         returnBtn.gameObject.SetActive(true);
         photoBtn.gameObject.SetActive(true);
         InteractionManager.Instance.guiHandCursor.gameObject.SetActive(true);
@@ -134,7 +134,7 @@ public class GamingPanel : BasePanel
         {
             Destroy(returnBtn.gameObject);
         }
-        if (PlayerManager.Instance.sex == Sex.Male)
+        if (GameManager.PlayerManager.sex == Sex.Male)
         {
             returnBtn = GameObject
                 .Instantiate(Resources.Load<GameObject>("Prefabs/UI/MaleReturnBtn"), transform)

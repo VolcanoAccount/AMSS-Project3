@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using AMSS;
 
 /// <summary>
 ///面板基类
@@ -9,6 +7,7 @@ using UnityEngine.UI;
 public class BasePanel : MonoBehaviour
 {
     protected CanvasGroup canvasGroup;
+    protected GameManager GameManager;
 
     #region 周期函数
     public virtual void OnEnter()
@@ -16,6 +15,10 @@ public class BasePanel : MonoBehaviour
         if (canvasGroup == null)
         {
             canvasGroup = transform.GetComponent<CanvasGroup>();
+        }
+        if (GameManager == null)
+        {
+            GameManager=GameManager.Instance;
         }
     }
 

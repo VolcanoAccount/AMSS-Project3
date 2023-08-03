@@ -10,7 +10,7 @@ public class GameOver : StateBase
     #region 状态类周期函数
     public override void OnEnter()
     {
-        if (gameManager.GameOver())
+        if (GameManager.GameOver())
         {
             gameController.ChangeState<GameGuid>(GameState.GameGuid);
         }

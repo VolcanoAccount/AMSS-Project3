@@ -1,28 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using DG.Tweening;
+using AMSS;
+
 
 public class SexSelectionPanel : BasePanel
 {
     Button maleBtn;
     Button femaleBtn;
 
-    void Start()
-    {
-        maleBtn = transform.Find("MaleBtn").GetComponent<Button>();
-        maleBtn.onClick.AddListener(OnClickMaleBtn);
-        femaleBtn = transform.Find("FemaleBtn").GetComponent<Button>();
-        femaleBtn.onClick.AddListener(OnClickFemaleBtn);
-    }
-
+    #region 面板周期函数
     public override void OnEnter()
     {
         base.OnEnter();
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1;
+    }
+
+    void Start()
+    {
+        maleBtn = transform.Find("MaleBtn").GetComponent<Button>();
+        maleBtn.onClick.AddListener(() =>
+        {
+            OnClickGenderBtn(Sex.Male);
+        });
+        femaleBtn = transform.Find("FemaleBtn").GetComponent<Button>();
+        femaleBtn.onClick.AddListener(() =>
+        {
+            OnClickGenderBtn(Sex.Female);
+        });
     }
 
     public override void OnPause()
@@ -41,16 +45,12 @@ public class SexSelectionPanel : BasePanel
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0;
     }
+    #endregion
 
-    void OnClickMaleBtn()
+    //性别选择按钮监听事件
+    void OnClickGenderBtn(Sex sex)
     {
-        PlayerManager.Instance.SetSex(Sex.Male);
-        UIManager.Instance.PushPanel(UIPanelType.ClothesOptions);
-    }
-
-    void OnClickFemaleBtn()
-    {
-        PlayerManager.Instance.SetSex(Sex.Female);
-        UIManager.Instance.PushPanel(UIPanelType.ClothesOptions);
+        GameManager.PlayerManager.SetSex(sex);
+        GameManager.PushPanel(UIPanelType.ClothesOptions);
     }
 }

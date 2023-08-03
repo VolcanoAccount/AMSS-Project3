@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace AMSS
 {
+    /// <summary>
+    /// 玩家手势监听
+    /// </summary>
     public class PlayerGestureListener : MonoBehaviour, KinectGestures.GestureListenerInterface
     {
         private static PlayerGestureListener instance = null;

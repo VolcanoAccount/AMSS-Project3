@@ -29,7 +29,7 @@ public class PhotoPanel : BasePanel
             downloadBtn = transform.Find("DownloadBtn").GetComponent<Button>();
         }
         downloadBtn.gameObject.SetActive(true);
-        photo.texture = PlayerManager.Instance.pohtoTex;
+        photo.texture = GameManager.PlayerManager.pohtoTex;
     }
 
     void Start()
@@ -63,7 +63,7 @@ public class PhotoPanel : BasePanel
     {
         qrCode.gameObject.SetActive(false);
         photo.gameObject.SetActive(true);
-        UIManager.Instance.PopPanel();
+        GameManager.PopPanel();
     }
 
     void OnClickDownloadBtn()
@@ -100,7 +100,7 @@ public class PhotoPanel : BasePanel
         {
             Destroy(returnBtn.gameObject);
         }
-        if (PlayerManager.Instance.sex == Sex.Male)
+        if (GameManager.PlayerManager.sex == Sex.Male)
         {
             returnBtn = GameObject
                 .Instantiate(Resources.Load<GameObject>("Prefabs/UI/MaleReturnBtn"), transform)

@@ -9,15 +9,18 @@ public enum Sex
     Female
 }
 
+/// <summary>
+/// 玩家数据管理类
+/// </summary>
 public class PlayerManager
 {
-    //TODO:玩家数据管理类完善
     //玩家性别
     public Sex sex { get; private set; }
 
     //玩家选择的服装
     public Clothes chooseClothes{get;private set;}
 
+    //玩家拍的照片
     public Texture2D pohtoTex{get;private set;}
 
     private static PlayerManager instance;

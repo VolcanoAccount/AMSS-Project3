@@ -11,11 +11,11 @@ public class Gaming : StateBase
     public override void OnEnter()
     {
         if (
-            gameManager.GetPanelType(gameManager.UIManager.PanelStack.Peek())
+            GameManager.GetPanelType(GameManager.UIManager.PanelStack.Peek())
             == UIPanelType.GamePrepare
         )
         {
-            gameManager.PushPanel(UIPanelType.SexSelection);
+            GameManager.PushPanel(UIPanelType.SexSelection);
         }
     }
 
@@ -25,11 +25,11 @@ public class Gaming : StateBase
     {
         if (!KinectManager.Instance.IsUserDetected())
         {
-            gameManager.StartTimer();
+            GameManager.StartTimer();
         }
         else
         {
-            gameManager.StopTimer();
+            GameManager.StopTimer();
         }
     }
     #endregion

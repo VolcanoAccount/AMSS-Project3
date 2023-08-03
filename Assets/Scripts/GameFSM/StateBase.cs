@@ -12,14 +12,14 @@ public abstract class StateBase
     //当前状态对象代表的枚举状态
     public GameState StateType;
     protected GameStateController gameController;
-    protected GameManager gameManager;
+    protected GameManager GameManager;
 
     //首次实例化时的初始化
     public void Init(GameStateController controller, GameState stateType)
     {
         this.StateType = stateType;
         gameController = controller;
-        gameManager = GameManager.Instance;
+        GameManager = GameManager.Instance;
     }
 
     #region 状态类周期函数

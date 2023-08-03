@@ -5,7 +5,10 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 namespace AMSS
-{
+{   
+    /// <summary>
+    /// AB包资源管理类
+    /// </summary>
     public class AssetBundleManager
     {
         private static AssetBundleManager instance;
@@ -21,16 +24,24 @@ namespace AMSS
             }
         }
 
+        //存储已下载的ab包资源
         private Dictionary<string, AssetBundle> loadedAssetBundles =
             new Dictionary<string, AssetBundle>();
         public Dictionary<string, AssetBundle> LoadedAssetBundles
         {
             get { return loadedAssetBundles; }
         }
+
+        //记录每个资源包被引用的次数
         private Dictionary<string, int> referenceCounts = new Dictionary<string, int>();
 
         private AssetBundleManager() { }
 
+        /// <summary>
+        /// 加载AB包
+        /// </summary>
+        /// <param name="bundlePath">资源包名字</param>
+        /// <returns>返回下载的ab包</returns>
         public AssetBundle LoadAssetBundle(string bundlePath)
         {
             if (!loadedAssetBundles.ContainsKey(bundlePath))
@@ -54,6 +65,12 @@ namespace AMSS
             return null;
         }
 
+        /// <summary>
+        /// 从服务器上拉取AB包
+        /// </summary>
+        /// <param name="bundleURL"></param>
+        /// <param name="bundleName">资源包名字</param>
+        /// <returns></returns>
         public IEnumerator LoadAssetBundleFromServer(string bundleURL, string bundleName)
         {
             if (!loadedAssetBundles.ContainsKey(bundleName))
