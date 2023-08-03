@@ -19,9 +19,5 @@ public class GameOver : StateBase
     public override void OnExit() { }
 
     public override void OnUpdate() { }
-
-    void Start() { }
-
-    void Update() { }
     #endregion
 }

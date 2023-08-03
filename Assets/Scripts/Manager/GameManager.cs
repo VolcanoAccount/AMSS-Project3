@@ -17,12 +17,12 @@ namespace AMSS
 
         public PlayerManager PlayerManager { get; private set; }
 
-        public GameObject kinectControllerGO { get; private set; }
+        public GameObject KinectControllerGO { get; private set; }
         Transform kinectCanvasTF;
 
-        public bool isInitKinect { get; private set; }
+        public bool IsInitKinect { get; private set; }
 
-        float totalTime = 60f;
+        readonly float totalTime = 60f;
 
         [SerializeField, Header("无玩家操作时长")]
         private float currentTime = 0;
@@ -30,27 +30,15 @@ namespace AMSS
 
         public bool isGaming = false;
 
-        private void Awake()
+        void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
+            Instance ??= this;
 
-            if (GameController == null)
-            {
-                GameController = GameStateController.Instance;
-            }
+            GameController ??= GameStateController.Instance;
 
-            if (UIManager == null)
-            {
-                UIManager = UIManager.Instance;
-            }
+            UIManager ??= UIManager.Instance;
 
-            if (PlayerManager == null)
-            {
-                PlayerManager = PlayerManager.Instance;
-            }
+            PlayerManager ??= PlayerManager.Instance;
         }
 
         void Start()
@@ -76,7 +64,7 @@ namespace AMSS
         //初始化Kinect配置
         public void InitKinect()
         {
-            kinectControllerGO = GameObject.Instantiate(
+            KinectControllerGO = GameObject.Instantiate(
                 Resources.Load<GameObject>("Prefabs/GameObject/KinectController")
             );
             kinectCanvasTF = GameObject
@@ -90,7 +78,7 @@ namespace AMSS
             PlayerGestureListener.Instance.gestureInfo = kinectCanvasTF
                 .Find("GestureInfo")
                 .GetComponent<Text>();
-            isInitKinect = true;
+            IsInitKinect = true;
         }
 
         public void StartTimer()

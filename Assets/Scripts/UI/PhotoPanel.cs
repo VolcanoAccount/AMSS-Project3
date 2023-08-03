@@ -29,7 +29,7 @@ public class PhotoPanel : BasePanel
             downloadBtn = transform.Find("DownloadBtn").GetComponent<Button>();
         }
         downloadBtn.gameObject.SetActive(true);
-        photo.texture = GameManager.PlayerManager.pohtoTex;
+        photo.texture = GameManager.PlayerManager.PohtoTex;
     }
 
     void Start()
@@ -76,21 +76,17 @@ public class PhotoPanel : BasePanel
 
     IEnumerator GenerateQRCode()
     {
-        using (
-            UnityWebRequest request = UnityWebRequestTexture.GetTexture(
-                "http://120.25.202.75/mnt/qrcode/qr/qr.jpg"
-            )
-        )
+        using UnityWebRequest request = UnityWebRequestTexture.GetTexture(
+            "http://120.25.202.75/mnt/qrcode/qr/qr.jpg"
+        );
+        yield return request.SendWebRequest();
+        if (request.error == null)
         {
-            yield return request.SendWebRequest();
-            if (request.error == null)
-            {
-                qrCode.texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
-            }
-            else
-            {
-                Debug.Log("下载出错" + request.responseCode + "," + request.error);
-            }
+            qrCode.texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+        }
+        else
+        {
+            Debug.Log("下载出错" + request.responseCode + "," + request.error);
         }
     }
 
@@ -100,7 +96,7 @@ public class PhotoPanel : BasePanel
         {
             Destroy(returnBtn.gameObject);
         }
-        if (GameManager.PlayerManager.sex == Sex.Male)
+        if (GameManager.PlayerManager.Sex == Sex.Male)
         {
             returnBtn = GameObject
                 .Instantiate(Resources.Load<GameObject>("Prefabs/UI/MaleReturnBtn"), transform)

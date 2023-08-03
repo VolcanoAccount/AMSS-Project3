@@ -27,19 +27,16 @@ public class GameStateController
     {
         get
         {
-            if (instance == null)
-            {
-                instance = new GameStateController();
-            }
+            instance ??= new GameStateController();
             return instance;
         }
     }
 
     //当前状态
-    public GameState currentState { get; private set; }
+    public GameState CurrentState { get; private set; }
 
     //先前状态
-    public GameState preState { get; private set; }
+    public GameState PreState { get; private set; }
 
     //当前状态对象
     StateBase CurrentObj;
@@ -49,8 +46,7 @@ public class GameStateController
 
     public void OnUpdate()
     {
-        if (CurrentObj != null)
-            CurrentObj.OnUpdate();
+        CurrentObj?.OnUpdate();
     }
 
     /// <summary>
@@ -63,19 +59,18 @@ public class GameStateController
         where K : StateBase, new()
     {
         //如果新状态和当前状态一致，不需要刷新状态
-        if (newState.Equals(currentState) && !reCurrState)
+        if (newState.Equals(CurrentState) && !reCurrState)
             return;
 
         //如果当前状态对象存在，应该执行其退出
-        if (CurrentObj != null)
-            CurrentObj.OnExit();
-        preState = currentState;
-        currentState = newState;
+        CurrentObj?.OnExit();
+        PreState = CurrentState;
+        CurrentState = newState;
         //基于新状态 获得一个新的状态对象
         CurrentObj = GetStateObj<K>(newState);
         CurrentObj.OnEnter();
-        Debug.Log("当前游戏状态：" + currentState);
-        Debug.Log("先前游戏状态：" + preState);
+        Debug.Log("当前游戏状态：" + CurrentState);
+        Debug.Log("先前游戏状态：" + PreState);
     }
 
     /// <summary>

@@ -12,7 +12,7 @@ public class GamePrepare : StateBase
     public override void OnEnter()
     {
         //初始化Kinect
-        if (GameManager.kinectControllerGO == null)
+        if (GameManager.KinectControllerGO == null)
         {
             GameManager.InitKinect();
         }

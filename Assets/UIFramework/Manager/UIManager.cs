@@ -14,10 +14,7 @@ public class UIManager
     {
         get
         {
-            if (instance == null)
-            {
-                instance = new UIManager();
-            }
+            instance ??= new UIManager();
             return instance;
         }
     }
@@ -67,12 +64,10 @@ public class UIManager
     //实例化面板
     public BasePanel GetPanel(UIPanelType uIPanelType)
     {
-        BasePanel basePanel;
-        panelDict.TryGetValue(uIPanelType, out basePanel); //根据Panel类型获取对应的面板
+        panelDict.TryGetValue(uIPanelType, out BasePanel basePanel); //根据Panel类型获取对应的面板
         if (basePanel == null)
         {
-            string path;
-            panelPathDict.TryGetValue(uIPanelType, out path);
+            panelPathDict.TryGetValue(uIPanelType, out string path);
             if (path == null)
             {
                 Debug.LogError("没有对应的路径，请查看配置表" + uIPanelType);

@@ -83,7 +83,7 @@ public class GamingPanel : BasePanel
 
     void GenerationClothing()
     {
-        Clothes clothes = PlayerManager.Instance.chooseClothes;
+        Clothes clothes = PlayerManager.Instance.ChooseClothes;
         clothesGO = GameObject.Instantiate(
             AssetBundleManager.Instance.LoadAsset<GameObject>(
                 "clothesitem",
@@ -134,7 +134,7 @@ public class GamingPanel : BasePanel
         {
             Destroy(returnBtn.gameObject);
         }
-        if (GameManager.PlayerManager.sex == Sex.Male)
+        if (GameManager.PlayerManager.Sex == Sex.Male)
         {
             returnBtn = GameObject
                 .Instantiate(Resources.Load<GameObject>("Prefabs/UI/MaleReturnBtn"), transform)

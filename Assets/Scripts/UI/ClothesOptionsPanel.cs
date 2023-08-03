@@ -92,7 +92,7 @@ public class ClothesOptionsPanel : BasePanel
         Debug.Log("添加服装前链表的大小：" + clothesList.Count);
         foreach (var item in clothesInfoJson.ClothesInfoList)
         {
-            if (item.Sex == (int)GameManager.PlayerManager.sex)
+            if (item.Sex == (int)GameManager.PlayerManager.Sex)
             {
                 Clothes clothes = new Clothes();
                 clothes.sex = item.Sex;
@@ -152,7 +152,7 @@ public class ClothesOptionsPanel : BasePanel
         {
             Destroy(btns);
         }
-        if (GameManager.PlayerManager.sex == Sex.Male)
+        if (GameManager.PlayerManager.Sex == Sex.Male)
         {
             btns = GameObject.Instantiate(
                 Resources.Load<GameObject>("Prefabs/UI/OptionsMaleButton"),

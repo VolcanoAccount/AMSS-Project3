@@ -16,10 +16,7 @@ namespace AMSS
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new AssetBundleManager();
-                }
+                instance ??= new AssetBundleManager();
                 return instance;
             }
         }
@@ -75,29 +72,25 @@ namespace AMSS
         {
             if (!loadedAssetBundles.ContainsKey(bundleName))
             {
-                using (
-                    UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(@bundleURL)
-                )
-                {
-                    yield return request.SendWebRequest();
+                using UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(@bundleURL);
+                yield return request.SendWebRequest();
 
-                    if (request.result == UnityWebRequest.Result.Success)
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+                    if (bundle != null)
                     {
-                        AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
-                        if (bundle != null)
-                        {
-                            loadedAssetBundles.Add(bundleName, bundle);
-                            referenceCounts.Add(bundleName, 1);
-                        }
-                        else
-                        {
-                            Debug.Log("bundle为空");
-                        }
+                        loadedAssetBundles.Add(bundleName, bundle);
+                        referenceCounts.Add(bundleName, 1);
                     }
                     else
                     {
-                        Debug.LogError("Failed to load asset bundle from server: " + request.error);
+                        Debug.Log("bundle为空");
                     }
+                }
+                else
+                {
+                    Debug.LogError("Failed to load asset bundle from server: " + request.error);
                 }
             }
             else
